@@ -1,5 +1,9 @@
 package com.celia.backend.incidencias.backend_incidencias.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,7 +11,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
@@ -18,6 +24,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//AUTOINCLEMENTABLE
     private Long id;
 
+    @Column(unique = true)
     private String email;
 
     private String password;
@@ -38,26 +45,20 @@ public class Usuario {
         inverseJoinColumns = @JoinColumn(name="role_id"),
         uniqueConstraints = { @UniqueConstraint(columnNames = {"user_id", "role_id"})}
     )
-    private Rol rol;
+    private List<Rol> roles;
 
-
+    @Transient
+    private boolean admin;
+    
     public Usuario() {
+        roles = new ArrayList<>();
     }
 
-
-    public Usuario(Long id, String email, String password, String nombre, String apellido, String telefono,
-            boolean enabled, Rol rol) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.telefono = telefono;
-        this.enabled = enabled;
-        this.rol = rol;
+   @PrePersist
+    public void prePersist() {
+        enabled = true;
     }
-
-
+    
     public Long getId() {
         return id;
     }
@@ -127,17 +128,21 @@ public class Usuario {
         this.enabled = enabled;
     }
 
-
-    public Rol getRol() {
-        return rol;
+    public List<Rol> getRoles() {
+        return roles;
     }
 
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 
-    
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 
        
 }
