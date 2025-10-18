@@ -34,15 +34,15 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 
     @Override
     @Transactional
-    public Usuario save(Usuario user, String roleName) {//Metodo para guardar un usuario
+    public Usuario save(Usuario user) {//Metodo para guardar un usuario
 
-        Optional<Rol> optionalRoleUser = roleRepository.findByName(roleName);
+        Optional<Rol> optionalRoleUser = roleRepository.findByNombre("ROL_USUARIO");
         List<Rol> roles = new ArrayList<>();
 
         optionalRoleUser.ifPresent(roles::add);
 
         if (user.isAdmin()) {
-            Optional<Rol> optionalRoleAdmin = roleRepository.findByName("ROLE_ADMIN");
+            Optional<Rol> optionalRoleAdmin = roleRepository.findByNombre("ROL_ADMIN");
             optionalRoleAdmin.ifPresent(roles::add);
         }
 
@@ -52,8 +52,8 @@ public class UsuarioServicioImpl implements UsuarioServicio{
     }
 
     @Override
-    public boolean existsByUsername(String username) {
-        return repository.existsByUsername(username);
+    public boolean existsByEmail(String email) {
+        return repository.existsByEmail(email);
     }
     
 }

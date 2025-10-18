@@ -31,7 +31,7 @@ public class Usuario {
 
     private String nombre;
 
-    private String apellido;
+    private String apellidos;
 
     private String telefono;
 
@@ -40,10 +40,10 @@ public class Usuario {
 
     @ManyToMany
     @JoinTable(
-        name = "users_roles",
-        joinColumns = @JoinColumn(name="user_id"),
-        inverseJoinColumns = @JoinColumn(name="role_id"),
-        uniqueConstraints = { @UniqueConstraint(columnNames = {"user_id", "role_id"})}
+        name = "usuario_roles",
+        joinColumns = @JoinColumn(name="usuario_id"),
+        inverseJoinColumns = @JoinColumn(name="rol_id"),
+        uniqueConstraints = { @UniqueConstraint(columnNames = {"usuario_id", "rol_id"})}
     )
     private List<Rol> roles;
 
@@ -99,13 +99,13 @@ public class Usuario {
     }
 
 
-    public String getApellido() {
-        return apellido;
+    public String getApellidos() {
+        return apellidos;
     }
 
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
 

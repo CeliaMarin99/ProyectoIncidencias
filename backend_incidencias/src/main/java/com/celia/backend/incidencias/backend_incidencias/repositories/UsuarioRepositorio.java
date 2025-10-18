@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.celia.backend.incidencias.backend_incidencias.entities.Usuario;
 
 public interface UsuarioRepositorio extends CrudRepository<Usuario, Long>{
-    boolean existsByUsername(String nombre);
+    boolean existsByEmail(String email);
 
-    Optional<Usuario> findByUsername(String nombre);
+    Optional<Usuario> findByEmail(String email);
 }

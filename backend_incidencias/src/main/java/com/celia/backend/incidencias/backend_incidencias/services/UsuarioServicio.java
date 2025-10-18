@@ -8,7 +8,7 @@ public interface UsuarioServicio {
     
     List<Usuario> findAll();
 
-    Usuario save(Usuario user, String roleName);
+    Usuario save(Usuario user);
 
-    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
 }
