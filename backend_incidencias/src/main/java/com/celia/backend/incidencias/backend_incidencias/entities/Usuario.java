@@ -3,6 +3,7 @@ package com.celia.backend.incidencias.backend_incidencias.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.celia.backend.incidencias.backend_incidencias.validation.ExistsByEmail;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -17,6 +18,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "usuarios")
@@ -27,6 +29,8 @@ public class Usuario {
     private Long id;
 
     @Column(unique = true)
+    @ExistsByEmail
+    @NotBlank
     private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

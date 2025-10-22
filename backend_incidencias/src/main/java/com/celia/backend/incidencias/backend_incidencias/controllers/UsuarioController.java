@@ -34,7 +34,7 @@ public class UsuarioController {
         user.setAdmin(true);
       
         service.save(user); //guarda el usuario con rol USER por defecto
-
+        
         return ResponseEntity.ok(Map.of("mensaje", "Usuario registrado correctamente"));
     }
 }
