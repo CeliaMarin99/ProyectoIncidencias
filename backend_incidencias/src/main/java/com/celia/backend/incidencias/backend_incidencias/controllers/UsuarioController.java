@@ -1,10 +1,12 @@
 package com.celia.backend.incidencias.backend_incidencias.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +18,7 @@ import com.celia.backend.incidencias.backend_incidencias.services.UsuarioServici
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:4200", originPatterns = "*")
 public class UsuarioController {
 
     @Autowired
@@ -32,6 +35,6 @@ public class UsuarioController {
       
         service.save(user); //guarda el usuario con rol USER por defecto
 
-        return ResponseEntity.ok().body("Usuario registrado correctamente");
+        return ResponseEntity.ok(Map.of("mensaje", "Usuario registrado correctamente"));
     }
 }
