@@ -8,11 +8,11 @@ import java.lang.annotation.Target;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-@Constraint(validatedBy = ExitsByEmailValidation.class)
+@Constraint(validatedBy = ExitsByUserNameValidation.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExistsByEmail {
-    String message() default "Ya existe un usuario con ese email";
+public @interface ExistsByUsername {
+    String message() default "Ya existe un usuario con ese nombre";
 
 	Class<?>[] groups() default { };
 

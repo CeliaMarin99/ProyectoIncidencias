@@ -1,1 +1,103 @@
-/* You can add global styles to this file, and also import other style files */
+// ---------------------------
+// 🎨 Variables personalizadas
+// ---------------------------
+
+// Colores base
+$principal: #004A59;
+$secundario: #027184;
+$naranja-oscuro: #C73618;
+$naranja-claro: #F16744;
+$blanco: #ffffff;
+$boton-color: #D45A20;
+$gradiente: linear-gradient($naranja-claro, $secundario);
+
+// ---------------------------
+// 🧱 Importar Bootstrap con variables sobrescritas
+// ---------------------------
+
+@use "bootstrap/scss/bootstrap" with (
+  $primary: $principal,
+  $secondary: $secundario,
+  $success: $naranja-oscuro,
+  $light: $blanco,
+  $input-color: $blanco,
+  $form-file-button-bg: $secundario,
+  $form-file-button-hover-bg: $principal,
+  $input-placeholder-color: $blanco,
+  $btn-border-radius: 15px,
+  $btn-font-size: 16px,
+  $border-radius: 15px,
+);
+
+// ---------------------------
+// ✨ Estilos personalizados
+// ---------------------------
+
+p {
+  font-size: 12px;
+}
+
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+// Títulos
+h1 {
+  font-size: 40px;
+}
+
+a {
+  font-size: 20px;
+}
+
+// Botón de formulario personalizado
+.btn-form {
+  border: none;
+  background-color: $boton-color;
+  border-radius: 15px;
+  color: $blanco;
+  padding: 5px 40px;
+}
+
+// Iconos
+.bi {
+  color: $blanco;
+  font-size: 1.5rem;
+}
+
+.bi-people-fill {
+  color: $blanco;
+  font-size: 4rem;
+}
+
+// Utilidades personalizadas
+.box-shadow {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.flex-end {
+  align-self: flex-end;
+}
+
+.h-300 {
+  height: 280px;
+}
+
+.bg-gradient {
+  background: $gradiente;
+}
+
+.bg-primary {
+  background-color: $principal !important;
+}
+
+.bg-success {
+  background-color: naranja-claro !important;
+}

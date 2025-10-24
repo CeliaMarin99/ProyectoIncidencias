@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,8 +34,9 @@ public class UsuarioController {
     public ResponseEntity<?> register(@Valid @RequestBody Usuario user, BindingResult result) {
         user.setAdmin(true);
       
-        service.save(user); //guarda el usuario con rol USER por defecto
-        
-        return ResponseEntity.ok(Map.of("mensaje", "Usuario registrado correctamente"));
+        //service.save(user); //guarda el usuario con rol USER por defecto
+
+        //return ResponseEntity.ok(Map.of("mensaje", "Usuario registrado correctamente"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(user));
     }
 }

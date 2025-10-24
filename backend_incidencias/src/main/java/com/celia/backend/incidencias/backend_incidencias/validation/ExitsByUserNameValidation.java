@@ -9,14 +9,14 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 @Component
-public class ExitsByEmailValidation implements ConstraintValidator<ExistsByEmail, String> {
+public class ExitsByUserNameValidation implements ConstraintValidator<ExistsByUsername, String> {
 
     @Autowired
     private UsuarioServicio servicio;
 
     @Override
-    public boolean isValid(String email, ConstraintValidatorContext context) {
-        return !servicio.existsByEmail(email);
+    public boolean isValid(String username, ConstraintValidatorContext context) {
+        return !servicio.existsByEmail(username);
     }
 
 }

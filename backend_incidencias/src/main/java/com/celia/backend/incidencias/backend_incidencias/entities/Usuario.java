@@ -3,7 +3,7 @@ package com.celia.backend.incidencias.backend_incidencias.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.celia.backend.incidencias.backend_incidencias.validation.ExistsByEmail;
+import com.celia.backend.incidencias.backend_incidencias.validation.ExistsByUsername;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -29,7 +29,11 @@ public class Usuario {
     private Long id;
 
     @Column(unique = true)
-    @ExistsByEmail
+
+    //@ExistsByEmail crea problemas al crear usuario
+    @NotBlank
+    private String username;
+
     @NotBlank
     private String email;
 
@@ -150,6 +154,13 @@ public class Usuario {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
     }
 
        
