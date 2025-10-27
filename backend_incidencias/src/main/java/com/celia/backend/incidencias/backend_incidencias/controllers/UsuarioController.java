@@ -1,7 +1,6 @@
 package com.celia.backend.incidencias.backend_incidencias.controllers;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +31,7 @@ public class UsuarioController {
 
     @PostMapping("/registrar") //Registro de usuario
     public ResponseEntity<?> register(@Valid @RequestBody Usuario user, BindingResult result) {
-        user.setAdmin(true);
+        user.setAdmin(false);
       
         //service.save(user); //guarda el usuario con rol USER por defecto
 

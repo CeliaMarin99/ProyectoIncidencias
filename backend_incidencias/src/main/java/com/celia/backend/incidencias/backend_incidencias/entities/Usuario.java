@@ -3,7 +3,7 @@ package com.celia.backend.incidencias.backend_incidencias.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.celia.backend.incidencias.backend_incidencias.validation.ExistsByUsername;
+//import com.celia.backend.incidencias.backend_incidencias.validation.ExistsByUsername;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -40,11 +40,11 @@ public class Usuario {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    private String nombre;
+    private String name;
 
-    private String apellidos;
+    private String lastName;
 
-    private String telefono;
+    private String phone;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean enabled = true;
@@ -100,34 +100,28 @@ public class Usuario {
         this.password = password;
     }
 
-
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-
-    public String getApellidos() {
-        return apellidos;
+    public String getLastName() {
+        return lastName;
     }
 
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-
-    public String getTelefono() {
-        return telefono;
+    public String getPhone() {
+        return phone;
     }
 
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
 

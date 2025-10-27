@@ -36,13 +36,13 @@ public class UsuarioServicioImpl implements UsuarioServicio{
     @Transactional
     public Usuario save(Usuario user) {//Metodo para guardar un usuario
 
-        Optional<Rol> optionalRoleUser = roleRepository.findByNombre("ROL_USUARIO");
+        Optional<Rol> optionalRoleUser = roleRepository.findByName("ROL_USUARIO");
         List<Rol> roles = new ArrayList<>();
 
         optionalRoleUser.ifPresent(roles::add);
 
         if (user.isAdmin()) {
-            Optional<Rol> optionalRoleAdmin = roleRepository.findByNombre("ROL_ADMIN");
+            Optional<Rol> optionalRoleAdmin = roleRepository.findByName("ROL_ADMIN");
             optionalRoleAdmin.ifPresent(roles::add);
         }
 

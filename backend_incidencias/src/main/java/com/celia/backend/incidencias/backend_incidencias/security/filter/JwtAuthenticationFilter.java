@@ -33,6 +33,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+    
     private AuthenticationManager authenticationManager;
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
@@ -44,12 +45,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             throws AuthenticationException {
 
         Usuario user = null;
-        String email = null;
+        String username = null;
         String password = null;
 
         try {
             user = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
-            email = user.getEmail();
+            username = user.getUsername();
             password = user.getPassword();
         } catch (StreamReadException e) {
             e.printStackTrace();
@@ -59,7 +60,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             e.printStackTrace();
         }
 
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email,
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
                 password);
 
         return authenticationManager.authenticate(authenticationToken);

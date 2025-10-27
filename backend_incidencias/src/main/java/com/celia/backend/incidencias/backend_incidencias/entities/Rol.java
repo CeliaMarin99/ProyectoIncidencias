@@ -16,15 +16,15 @@ public class Rol {
     private Long id;
 
     @Column(unique = true)
-    private String nombre;
+    private String name;
 
     
     public Rol() {
        
     }
 
-    public Rol(String nombre) {
-        this.nombre = nombre;
+    public Rol(String name) {
+        this.name = name;
     }
 
     public Long getId() {
@@ -35,12 +35,12 @@ public class Rol {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
 

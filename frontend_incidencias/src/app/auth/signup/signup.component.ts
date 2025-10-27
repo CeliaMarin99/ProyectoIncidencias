@@ -12,11 +12,12 @@ export class SignupComponent implements OnInit{
 
   // Objeto user como propiedad del componente
   public user = {
+    username: '',
     email: '',
     password: '',
-    nombre: '',
-    apellidos: '',
-    telefono: ''
+    name: '',
+    lastName: '',
+    phone: ''
   };
 
     constructor(private userService:UserService) { }
@@ -27,7 +28,7 @@ export class SignupComponent implements OnInit{
     
     formSubmit() {
       console.log(this.user);
-      if(this.user.nombre=='' || this.user.nombre==null){
+      if(this.user.name=='' || this.user.name==null){
         return alert("El nombre es obligatorio");
     }
 

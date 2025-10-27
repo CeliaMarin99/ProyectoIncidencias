@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,9 +23,14 @@ import com.celia.backend.incidencias.backend_incidencias.security.filter.JwtAuth
 import com.celia.backend.incidencias.backend_incidencias.security.filter.JwtValidationFilter;
 
 @Configuration
+@EnableMethodSecurity(prePostEnabled=true)
 public class SecurityConfig {
 
     private AuthenticationConfiguration authenticationConfiguration;
+
+    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration) {
+        this.authenticationConfiguration = authenticationConfiguration;
+    }
 
     @Bean
     AuthenticationManager authenticationManager() throws Exception {
@@ -49,7 +55,7 @@ public class SecurityConfig {
             .build();
     }
  
-    /* 
+   
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
@@ -63,6 +69,7 @@ public class SecurityConfig {
         return source;
     }
 
+    /* 
     @Bean
     FilterRegistrationBean<CorsFilter> corsFilter(){
         FilterRegistrationBean<CorsFilter> corsBean = new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));

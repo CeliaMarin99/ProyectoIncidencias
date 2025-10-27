@@ -36,7 +36,7 @@ public class JpaUserDetailsService implements UserDetailsService {
         Usuario user = userOptional.orElseThrow();
 
         List<GrantedAuthority> authorities = user.getRoles().stream()
-        .map(role -> new SimpleGrantedAuthority(role.getNombre()))
+        .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), 

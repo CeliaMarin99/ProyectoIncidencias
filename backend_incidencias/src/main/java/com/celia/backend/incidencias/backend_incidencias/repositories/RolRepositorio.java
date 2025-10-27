@@ -8,6 +8,6 @@ import com.celia.backend.incidencias.backend_incidencias.entities.Rol;
 
 public interface RolRepositorio extends CrudRepository<Rol, Long> {
 
-    Optional<Rol> findByNombre(String nombre);
+    Optional<Rol> findByName(String name);
     
 }
