@@ -50,7 +50,7 @@ public class SecurityConfig {
         .addFilter(new JwtAuthenticationFilter(authenticationManager()))
         .addFilter(new JwtValidationFilter(authenticationManager()))
         .csrf(config -> config.disable())//solo para vistas
-        //.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))//sin estado porque la sesion se guarda en token
             .build();
     }
