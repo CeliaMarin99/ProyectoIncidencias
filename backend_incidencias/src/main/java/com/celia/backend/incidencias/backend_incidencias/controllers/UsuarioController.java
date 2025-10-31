@@ -1,10 +1,14 @@
 package com.celia.backend.incidencias.backend_incidencias.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,4 +42,12 @@ public class UsuarioController {
         //return ResponseEntity.ok(Map.of("mensaje", "Usuario registrado correctamente"));
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(user));
     }
+
+    //Devvuelve el usuario autenticado
+    @GetMapping("/usuario-actual")
+    public ResponseEntity<?> obtenerUsuarioActual(Authentication authentication) {
+    String username = (String) authentication.getPrincipal(); // <--- el principal es un String
+    return ResponseEntity.status(HttpStatus.OK).body(service.findByUsername(username));
+    }
+
 }

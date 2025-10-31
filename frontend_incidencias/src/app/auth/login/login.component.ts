@@ -33,6 +33,12 @@ export class LoginComponent implements OnInit {
       (data: any) => {
         console.log("Token recibido:", data);
 
+        this.loginService.loginUser(data.token);
+        this.loginService.getCurrentUser().subscribe((user:any)=> {
+          console.log("Usuario actual:", user);
+        }
+
+        )
         // Aquí puedes guardar el token en localStorage
         // localStorage.setItem('token', data.token);
 

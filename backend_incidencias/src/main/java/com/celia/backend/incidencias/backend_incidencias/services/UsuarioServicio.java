@@ -8,6 +8,8 @@ public interface UsuarioServicio {
     
     List<Usuario> findAll();
 
+    Usuario findByUsername(String username);
+
     Usuario save(Usuario user);
 
     boolean existsByEmail(String email);

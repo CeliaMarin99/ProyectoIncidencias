@@ -55,5 +55,10 @@ public class UsuarioServicioImpl implements UsuarioServicio{
     public boolean existsByEmail(String username) {
         return repository.existsByUsername(username);
     }
+
+    @Override
+    public Usuario findByUsername(String username) {
+        return repository.findByUsername(username).orElse(null);
+    }
     
 }
