@@ -42,6 +42,7 @@ public class Usuario {
 
     private String name;
 
+    @JsonProperty("last_name")
     private String lastName;
 
     private String phone;

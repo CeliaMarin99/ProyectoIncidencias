@@ -59,9 +59,12 @@ export class LoginService {
 
   //Obtenemos el rol del usuario
   public getUserRole(){
-    let user=this.getUser();
-    return user.authorities[0].authority;
+  const user = this.getUser();
+  if (user && user.roles && user.roles.length > 0) {
+    return user.roles[0].name; // ✅ Usamos 'name' porque así se llama en el backend
   }
+  return null;
+}
 
   public getCurrentUser(){
     return this.http.get(`${baseUrl}/users/usuario-actual`);

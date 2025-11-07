@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from "@angular/router";
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     password: ''
   };
   
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -35,13 +36,23 @@ export class LoginComponent implements OnInit {
 
         this.loginService.loginUser(data.token);
         this.loginService.getCurrentUser().subscribe((user:any)=> {
+          this.loginService.setUser(user);
           console.log("Usuario actual:", user);
+
+          //Comprueba el rol y muestra la página correspondiente
+          if(this.loginService.getUserRole() == "ROLE_TECNICO"){
+            //dashboard tecnico
+             this.router.navigate(['/tecnico/home']);
+          }else if(this.loginService.getUserRole() == "ROLE_USUARIO"){
+            //user dashboard
+             this.router.navigate(['/user/home']);
+          }else{
+            this.loginService.logout();
+          }
         }
 
         )
-        // Aquí puedes guardar el token en localStorage
-        // localStorage.setItem('token', data.token);
-
+        
       },
       (error) => {
         console.log("Error al generar token:", error);
