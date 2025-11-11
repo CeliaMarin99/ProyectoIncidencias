@@ -5,6 +5,7 @@ import { HomeClientComponent } from './pages/user/home-client/home-client.compon
 import { CrearIncidenciaComponent } from './pages/crear-incidencia/crear-incidencia.component';
 import { EditarIncidenciaComponent } from './pages/editar-incidencia/editar-incidencia.component';
 import { TecnicoHomeComponent } from './pages/tecnico/tecnico-home/tecnico-home.component';
+import { UsuarioGuard } from './services/usuario.guard';
 
 
 export const routes: Routes = [
@@ -21,9 +22,9 @@ export const routes: Routes = [
   {
     path: 'user',
     children: [
-      { path: 'home', component: HomeClientComponent },
-      { path: 'crear', component: CrearIncidenciaComponent },
-      { path: 'editar', component: EditarIncidenciaComponent}
+      { path: 'home', component: HomeClientComponent /*,canActivate: [UsuarioGuard] */ },
+      { path: 'crear', component: CrearIncidenciaComponent /*,canActivate: [UsuarioGuard] */  },
+      { path: 'editar', component: EditarIncidenciaComponent /*,canActivate: [UsuarioGuard] */}
     ]
   },
 

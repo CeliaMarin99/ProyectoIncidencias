@@ -46,8 +46,8 @@ public class UsuarioController {
     //Devvuelve el usuario autenticado
     @GetMapping("/usuario-actual")
     public ResponseEntity<?> obtenerUsuarioActual(Authentication authentication) {
-    String username = (String) authentication.getPrincipal(); // <--- el principal es un String
-    return ResponseEntity.status(HttpStatus.OK).body(service.findByUsername(username));
+        String username = (String) authentication.getPrincipal(); // <--- el principal es un String
+        return ResponseEntity.status(HttpStatus.OK).body(service.findByUsername(username));
     }
 
 }

@@ -10,41 +10,7 @@
 
 <body>
 
-  <!--NAVBAR-->
-  <nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container">
-
-          <a class="navbar-brand text-light" href="#">Ruiz-Idencias</a>
-
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active text-light" aria-current="page" href="#"><i class="bi bi-chat-dots mx-2"></i>Enviar mensaje</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="#"><i class="bi bi-envelope-fill mx-2"></i>Buzón</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="#"><i class="bi bi-envelope-fill mx-2"></i>Incidencias</a>
-                    </li>
-                  
-                </ul>
-
-                <ul class="navbar-nav">
-                    
-                    <li class="nav-item ">
-                    <a href="" class="nav-link text-light"><img src="" alt="" class="img-fluid rounded-circle" width="40px"></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-  <!--FIN NAVBAR-->
+  <app-navbar></app-navbar>
 
   <!--MAIN-->
    <main class="container">
@@ -55,9 +21,9 @@
       </div>
 
       <!--Buscador-->
-      <form class="row my-3" th:action="@{/}" method="get">
+      <form class="row my-3" method="get">
           <div class="col-md-6">
-              <input type="text" name="palabraClave" id="palabraClave" class="form-control" placeholder="Buscar incidencias..." th:value="${palabraClave}">
+              <input type="text" name="palabraClave" id="palabraClave" class="form-control" placeholder="Buscar incidencias...">
           </div> 
           <div class="col-md-2">
               <button type="submit" class="btn btn-primary w-100">Buscar</button>
