@@ -21,20 +21,34 @@ export class AsignarIncidenciasComponent {
   ) { }
   
   ngOnInit(): void {
-    this.obtenerIncidenciasTecnico();
+    this.obtenerIncidenciasNoAsignadas();
   }
 
-  //metodo para recuperar todas las incidencias del tecnico
-  obtenerIncidenciasTecnico(): void {
+  //metodo para obtener las incidencias no asignadas
+  obtenerIncidenciasNoAsignadas(): void {
     this.incidenciaService.findUnassignedIncidencias().subscribe({
       next: (data) => {
         this.incidencias = data;
-        console.log("Incidencias sin técnico: ", this.incidencias);
+        console.log("Incidencias no asignadas: ", this.incidencias);
       },
       error: (err) => {
-        console.log("Error al recuperar las incidencias sin técnico: ", err);
+        console.log("Error al recuperar las incidencias no asignadas: ", err);
       } 
     });
+  }
 
+  //metodo para asignar una incidencia al tecnico logueado
+  asignarIncidencia(idIncidencia: number): void {
+    const user = this.loginService.getUser();
+    const idTecnico = user.id;
+    this.incidenciaService.asignarTecnico(idIncidencia, idTecnico).subscribe({
+      next: (data) => {
+        console.log("Incidencia asignada correctamente: ", data);
+        this.obtenerIncidenciasNoAsignadas(); // Actualizar la lista después de asignar
+      },
+      error: (err) => {
+        console.log("Error al asignar la incidencia: ", err);
+      } 
+    });
   }
 }

@@ -28,8 +28,8 @@ export const routes: Routes = [
       { path: 'editar/:id', component: EditarIncidenciaComponent /*,canActivate: [UsuarioGuard] */}
     ]
   },
-
-     //Rutas páginas tecnico
+  
+  //Rutas páginas tecnico
   {
     path: 'tecnico',
     children: [

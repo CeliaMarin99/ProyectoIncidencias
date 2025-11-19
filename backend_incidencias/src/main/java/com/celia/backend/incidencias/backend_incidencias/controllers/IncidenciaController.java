@@ -95,7 +95,7 @@ public class IncidenciaController {
 
     //Asignar tecnico a incidencia
     @PutMapping("/asignar-tecnico/{idIncidencia}/tecnico/{idTecnico}")
-    public ResponseEntity<?> asignarTecnicoAIncidencia(@PathVariable Long idIncidencia, @PathVariable Long idTecnico) {
+    public ResponseEntity<?> asignarTecnico(@PathVariable Long idIncidencia, @PathVariable Long idTecnico) {
         Optional<Incidencia> incidenciaOptional = servicio.asignarTecnico(idIncidencia, idTecnico);
 
         if(incidenciaOptional.isPresent()){

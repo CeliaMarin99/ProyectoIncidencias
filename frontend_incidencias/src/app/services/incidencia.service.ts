@@ -57,4 +57,9 @@ export class IncidenciaService {
     return this.http.get<Incidencia[]>(`${baseUrl}/incidencias/sin-tecnico`);
   }
 
+  //Asignar tecnico a una incidencia
+  asignarTecnico(idIncidencia: number, idTecnico: number): Observable<Incidencia> {
+    return this.http.put<Incidencia>(`${baseUrl}/incidencias/asignar-tecnico/${idIncidencia}/tecnico/${idTecnico}`,{});
+  }
+
 }
