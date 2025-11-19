@@ -13,4 +13,5 @@ public interface UsuarioServicio {
     Usuario save(Usuario user);
 
     boolean existsByEmail(String email);
+
 }

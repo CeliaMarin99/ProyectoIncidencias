@@ -6,14 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <app-navbar></app-navbar>
+  
 
      <!--MAIN-->
    <main class="container">
     <!--Título-->
     <div class="row my-4">
       <div class="col">
-        <h1 class="fw-bold">Mis Incidencias</h1>
+        <h1 class="fw-bold">Incidencias sin asignar</h1>
       </div>
 
       <!--Buscador-->
@@ -39,7 +39,7 @@
                           <div class="d-flex">
                               <p class="text-light mx-2 mt-2 fs-6">{{incidencia.prioridad}}</p>
                               <p class="text-light mx-3 mt-2 fs-6">{{incidencia.fecha}}</p>
-                          </div>  
+                          </div>     
                     </div>
 
                     <!--card body-->
@@ -52,7 +52,7 @@
                           <h5>{{incidencia.titulo}}</h5>
                           <div class="col">
                             <p class="fs-6">Por: {{ incidencia.empleado.username }}</p>
-                            <p class="fs-6">Técnico: {{incidencia.tecnico?.username}}</p>      
+                            <p class="fs-6">Técnico: Sin asignar</p>      
                           </div>
 
                           <div class="col">
@@ -65,27 +65,10 @@
 
                     <!--card footer-->
                     <div class="card-footer">
-                            <p class="fs-6">Detalles</p>
-                            <p class="fs-6">{{incidencia.detalles}}</p>
-                    </div>
-                    <!--Modal-->
-                        <div class="modal" id="modal1">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h3 class="modal-title">¡Advertencia!</h3>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <h5>¿Seguro que quieres eliminar esta incidencia?</h5>
-                              </div>
-                              <div class="modal-footer justify-content-center">
-                                <button type="button" class="btn btn-secondary">Sí</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
-                              </div>
-                            </div>
-                          </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-primary">Asignar a mí</button>
                         </div>
+                    </div>
               </div>
               
         </div>

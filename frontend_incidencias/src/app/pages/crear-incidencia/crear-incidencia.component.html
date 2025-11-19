@@ -7,38 +7,7 @@
 </head>
 <body>
    
-    <nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container-fluid">
-                <a class="navbar-brand text-light" href="#">Ruiz-Idencias</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active text-light" aria-current="page" href="#"><i class="bi bi-chat-dots mx-2"></i>Enviar mensaje</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="#"><i class="bi bi-envelope-fill mx-2"></i>Buzón</a>
-                    </li>
-                    <li class="nav-item dropdown mt-2">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Incidencias
-                        </a>
-                        <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Modificar</a></li>
-                        <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                        </ul>
-                    </li>
-                    
-                    </ul>
-                    <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-success text-light" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-      </nav>
+   <app-navbar></app-navbar>
 
       <main class="container">
             <div class="row">
@@ -49,44 +18,44 @@
 
             <div class="row ">
                 <div class="col box-shadow">
-                    <form>
+                    <form (ngSubmit)="crearIncidencia()">
                         <div class="row">
                             <div class="col mb-3">
-                                <label for="titulo" class="form-label">Título</label>
-                                <input type="text" class="form-control" id="titulo" placeholder="Ingrese el título de la incidencia">
+                                <label for="titulo" class="form-label">Título*</label>
+                                <input [(ngModel)]="incidencia.titulo" type="text" class="form-control" name="titulo" id="titulo" placeholder="Ingrese el título de la incidencia">
                             </div>
 
                             <div class="col mb-3">
-                                <label for="fecha" class="form-label">Fecha</label>
-                                <input type="date" class="form-control" id="fecha">
+                                <label for="fecha" class="form-label">Fecha*</label>
+                                <input [(ngModel)]="incidencia.fecha" type="date" class="form-control" name="fecha" id="fecha">
                             </div>
 
                               <div class="col mb-3">
-                                <label for="lugar" class="form-label">Lugar</label>
-                                <input type="text" class="form-control" id="lugar" placeholder="¿Dónde ocurrió?">
+                                <label for="lugar" class="form-label">Lugar*</label>
+                                <input [(ngModel)]="incidencia.lugar"  type="text" class="form-control" name="lugar" id="lugar" placeholder="¿Dónde ocurrió?">
                             </div>
                         </div>
 
                             <div class="row">
                                 <div class="col mb-3">
                                     <label for="prioridad" class="form-label">Nivel de Prioridad:</label>
-                                    <select class="form-select" id="prioridad">
+                                    <select [(ngModel)]="incidencia.prioridad" name="prioridad" class="form-select" id="prioridad">
                                         <option selected>Seleccione la prioridad</option>
-                                        <option value="1">Grave</option>
-                                        <option value="2">Moderado</option>
-                                        <option value="3">Leve</option>
+                                        <option value="Grave">Grave</option>
+                                        <option value="Moderado">Moderado</option>
+                                        <option value="Leve">Leve</option>
                                     </select>
                                 </div>
 
                                 <div class="col mb-3">
                                     <label for="categoria" class="form-label">Categoría:</label>
-                                    <select class="form-select" id="categoria">
+                                    <select [(ngModel)]="incidencia.categoria" class="form-select" id="categoria" name="categoria">
                                         <option selected>Seleccione una categoría</option>
-                                        <option value="1">Software</option>
-                                        <option value="2">Hardware</option>
-                                        <option value="3">Red</option>
-                                        <option value="4">Cuenta de Usuario</option>
-                                        <option value="5">Otros</option>
+                                        <option value="Software">Software</option>
+                                        <option value="Hardware">Hardware</option>
+                                        <option value="Red">Red</option>
+                                        <option value="Cuenta de Usuario">Cuenta de Usuario</option>
+                                        <option value="Otros">Otros</option>
                                     </select>
                                 </div>
                             </div>
@@ -94,12 +63,12 @@
                             <div class="row">
                                 <div class="col mb-3">
                                     <label for="descripcion" class="form-label">Descripción</label>
-                                    <textarea class="form-control" id="descripcion" rows="4" placeholder="Describa la incidencia"></textarea>
+                                    <textarea [(ngModel)]="incidencia.detalles" class="form-control" name="detalles" id="detalles" rows="4" placeholder="Describa la incidencia"></textarea>
                                 </div>
 
                                 <div class="col">
                                     <label for="imagen" class="form-label">Subir imagen (Opcional)</label>
-                                    <input type="file" class="form-control" id="imagen">
+                                    <input  type="file" class="form-control" id="imagen">
                                 </div>
 
                             </div>

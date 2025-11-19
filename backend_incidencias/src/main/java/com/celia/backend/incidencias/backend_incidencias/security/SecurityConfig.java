@@ -2,10 +2,10 @@ package com.celia.backend.incidencias.backend_incidencias.security;
 
 import java.util.Arrays;
 
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
+//import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
+//import org.springframework.core.Ordered;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
+//import org.springframework.web.filter.CorsFilter;
 
 import com.celia.backend.incidencias.backend_incidencias.security.filter.JwtAuthenticationFilter;
 import com.celia.backend.incidencias.backend_incidencias.security.filter.JwtValidationFilter;

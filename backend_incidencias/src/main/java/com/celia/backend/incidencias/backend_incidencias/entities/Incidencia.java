@@ -1,6 +1,5 @@
 package com.celia.backend.incidencias.backend_incidencias.entities;
 
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,11 +21,17 @@ public class Incidencia {
 
     private String prioridad;
 
+    private String estado;
+
+    private String lugar;
+
+    private String categoria;
+
     private String detalles;
 
-    private String photo_url;
+    private String photo;
 
-    private LocalDateTime fecha = LocalDateTime.now();
+    private String fecha;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -71,20 +76,12 @@ public class Incidencia {
         this.detalles = detalles;
     }
 
-    public String getPhoto_url() {
-        return photo_url;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setPhoto_url(String photo_url) {
-        this.photo_url = photo_url;
-    }
-
-    public LocalDateTime getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public Usuario getEmpleado() {
@@ -102,6 +99,40 @@ public class Incidencia {
     public void setTecnico(Usuario tecnico) {
         this.tecnico = tecnico;
     }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    
 
     
 }

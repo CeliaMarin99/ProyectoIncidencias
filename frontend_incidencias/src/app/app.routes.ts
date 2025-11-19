@@ -6,6 +6,7 @@ import { CrearIncidenciaComponent } from './pages/crear-incidencia/crear-inciden
 import { EditarIncidenciaComponent } from './pages/editar-incidencia/editar-incidencia.component';
 import { TecnicoHomeComponent } from './pages/tecnico/tecnico-home/tecnico-home.component';
 import { UsuarioGuard } from './services/usuario.guard';
+import { AsignarIncidenciasComponent } from './pages/tecnico/asignar-incidencias/asignar-incidencias.component';
 
 
 export const routes: Routes = [
@@ -22,9 +23,9 @@ export const routes: Routes = [
   {
     path: 'user',
     children: [
-      { path: 'home', component: HomeClientComponent /*,canActivate: [UsuarioGuard] */ },
-      { path: 'crear', component: CrearIncidenciaComponent /*,canActivate: [UsuarioGuard] */  },
-      { path: 'editar', component: EditarIncidenciaComponent /*,canActivate: [UsuarioGuard] */}
+      { path: 'home', component: HomeClientComponent, /*canActivate: [UsuarioGuard]*/ },
+      { path: 'crear', component: CrearIncidenciaComponent ,/*canActivate: [UsuarioGuard]*/ },
+      { path: 'editar/:id', component: EditarIncidenciaComponent /*,canActivate: [UsuarioGuard] */}
     ]
   },
 
@@ -32,7 +33,9 @@ export const routes: Routes = [
   {
     path: 'tecnico',
     children: [
-      { path: 'home', component: TecnicoHomeComponent}
+      { path: 'home', component: TecnicoHomeComponent},
+      { path: 'asignar', component: AsignarIncidenciasComponent},
+
     ]
   },
 

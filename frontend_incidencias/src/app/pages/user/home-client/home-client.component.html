@@ -23,10 +23,10 @@
       <!--Buscador-->
       <form class="row my-3" method="get">
           <div class="col-md-6">
-              <input type="text" name="palabraClave" id="palabraClave" class="form-control" placeholder="Buscar incidencias...">
+              <input [(ngModel)]="palabraClave"  type="text" name="palabraClave" id="palabraClave" class="form-control" placeholder="Buscar incidencias...">
           </div> 
           <div class="col-md-2">
-              <button type="submit" class="btn btn-primary w-100">Buscar</button>
+              <button (click)="buscarIncidencia(palabraClave)" type="submit" class="btn btn-primary w-100">Buscar</button>
           </div>
       </form>
     </div>
@@ -34,101 +34,73 @@
         <!--CARDS-->
         <div class="row">
           <!--columna 1-->
-          <div class="col-md-6 mb-4">
+          <div *ngFor="let incidencia of incidencias" class="col-md-5 mb-4">
   
             <!--inicio card-->
               <div class="card w-md mx-4 mt-2" id="item-1">
                 <!--card header-->
                   <div class="card-header bg-danger d-flex justify-content-between" style="height: 50px;">
                           <div class="d-flex">
-                              <p class="text-light mx-2 mt-2 fs-6">Grave</p>
-                              <p class="text-light mx-3 mt-2 fs-6">02/03/2025</p>
+                              <p class="text-light mx-2 mt-2 fs-6">{{incidencia.prioridad}}</p>
+                              <p class="text-light mx-3 mt-2 fs-6">{{incidencia.fecha}}</p>
                           </div>
                                     
                           <div class=" ">
-                              <a href="" class=""><i class="bi bi-wrench-adjustable text-light fs-4"></i></a>
-                              <a href="" class="mx-2"><i class="bi bi-x-square-fill text-light fs-4"></i></a>
+                              <a [routerLink]="['/user/editar', incidencia.id]" class=""><i class="bi bi-wrench-adjustable text-light fs-4"></i></a>
+                              <a href="eliminar" class="mx-2" data-bs-toggle="modal" data-bs-target="#modal1"><i class="bi bi-x-square-fill text-light fs-4"></i></a>
                           </div>    
                     </div>
 
                     <!--card body-->
                     <div class="card-body">
-                      <div class="row">
+                        <div class="row">
+                              <img src="img/margarita.jpg" alt="" class="img-fluid">   
+                        </div>
+                            
+                        <div class="row">
+                          <h5>{{incidencia.titulo}}</h5>
                           <div class="col">
-                            <img src="img/margarita.jpg" alt="" class="img-fluid">
+                            <p class="fs-6">Por: {{ incidencia.empleado.username }}</p>
+                            <p class="fs-6">Técnico: Sin asignar</p>      
                           </div>
 
                           <div class="col">
-                              <div class="row">
-                                 <div class="col">
-                                    <p class="fs-6">Por: Nombre</p>
-                                 </div>
-                                 <div class="col">
-                                   <p class="fs-6">Lugar: Aula</p>
-                                 </div>
-                              </div>
-                               
+                            <p class="fs-6">Lugar: {{incidencia.lugar}}</p>
+                            <p class="fs-6">Estado: {{incidencia.estado}}</p>
+                            <p class="fs-6">Categoría: {{incidencia.categoria}}</p>
                           </div>
-                      </div>
-                      
-
+                        </div>
                     </div>
 
                     <!--card footer-->
                     <div class="card-footer">
-                   
+                            <p class="fs-6">Detalles</p>
+                            <p class="fs-6">{{incidencia.detalles}}</p>
+
                     </div>
+                    <!--Modal-->
+                        <div class="modal" id="modal1">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h3 class="modal-title">¡Advertencia!</h3>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <h5>¿Seguro que quieres eliminar esta incidencia?</h5>
+                              </div>
+                              <div class="modal-footer justify-content-center">
+                                <button (click)="deleteIncidencia(incidencia.id!)" type="button" class="btn btn-secondary">Sí</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
               </div>
-              <!--fin card-->
-        </div>
-            <!--segunda columna
-              <div class="col-md-4 mb-4">
-                  inicio card
-              <div class="card w-md-75 mx-4 mt-2" id="item-1">
-                card header
-                  <div class="card-header bg-danger d-flex justify-content-between" style="height: 50px;">
-                          <div class="d-flex">
-                              <p class="text-light mx-2 mt-2 fs-6">Grave</p>
-                              <p class="text-light mx-3 mt-2 fs-6">02/03/2025</p>
-                          </div>
-                                    
-                          <div class=" ">
-                              <a href="" class=""><i class="bi bi-wrench-adjustable"></i></a>
-                              <a href="" class="mx-2"><i class="bi bi-x-square-fill"></i></a>
-                          </div>    
-                    </div>
-
-                    card body
-                    <div class="card-body d-flex">
-
-                      <div class="row">
-
-                          <div class="col-md-6">
-                            <img src="img/default.jpeg" alt="" class="img-fluid">
-                          </div>
-
-                          <div class="col-md-6">
-                            <p class="fs-6">Por: Nombre</p>
-                            <p class="fs-6">Lugar: Aula</p>
-                            <p class="fs-6">Estado: Reparando</p>
-                          </div>
-                            
-                      </div>
-
-                    </div>
-
-                    card footer
-                    <div class="card-footer">
-                      <p class="fs-6">Detalles:</p>
-                      <p class="fs-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                          Nihil cumque deserunt hic saepe! Soluta, excepturi! Ducimus delectus neque</p>
-                    </div>
-              </div>
-              fin card
               
-              </div>-->
-    
         </div>
+            <!--fin card-->
+      </div>
  </main>
  
 </body>
