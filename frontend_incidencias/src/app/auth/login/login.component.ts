@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
              this.loginService.loginStatusSubjec.next(true);
           }else if(this.loginService.getUserRole() == "ROLE_USUARIO"){
             //user dashboard
-             this.router.navigate(['/user/home']);
+             this.router.navigate(['/empleado/home']);
              this.loginService.loginStatusSubjec.next(true);
           }else{
             this.loginService.logout();

@@ -47,7 +47,7 @@ export class CrearIncidenciaComponent implements OnInit{
     this.incidenciaService.reportarIncidencia(this.incidencia).subscribe({
       next: (response) => {
         console.log('Incidencia creada:', response);
-        this.router.navigate(['/user/home']);
+        this.router.navigate(['/empleado/home']);
       },
       error: (err) => {
         console.error('Error al crear incidencia:', err);

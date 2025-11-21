@@ -8,10 +8,10 @@ import com.celia.backend.incidencias.backend_incidencias.entities.Mensaje;
 
 public interface MensajeRepositorio extends JpaRepository<Mensaje, Long> {
 
-    List<Mensaje> findByReceptorIdOrderByFechaEnvioDesc(Long receptorId);
+    List<Mensaje> findByReceptorIdOrderByFechaDesc(Long receptorId);
 
-    List<Mensaje> findByEmisorIdOrderByFechaEnvioDesc(Long emisorId);
+    List<Mensaje> findByEmisorIdOrderByFechaDesc(Long emisorId);
 
-    List<Mensaje> findByIncidenciaIdOrderByFechaEnvioAsc(Long incidenciaId);
+    List<Mensaje> findByIncidenciaIdOrderByFechaAsc(Long incidenciaId);
 }
 

@@ -22,16 +22,16 @@ public class MensajeService {
 
     //Obtiene los mensajes recibidos por un usuario específico, ordenados por fecha descendente
     public List<Mensaje> getMensajesRecibidos(Long userId) {
-        return repo.findByReceptorIdOrderByFechaEnvioDesc(userId);
+        return repo.findByReceptorIdOrderByFechaDesc(userId);
     }
 
     //Obtiene los mensajes enviados por un usuario específico, ordenados por fecha descendente
     public List<Mensaje> getMensajesEnviados(Long userId) {
-        return repo.findByEmisorIdOrderByFechaEnvioDesc(userId);
+        return repo.findByEmisorIdOrderByFechaDesc(userId);
     }
 
     //Obtiene los mensajes asociados a una incidencia específica, ordenados por fecha ascendente
     public List<Mensaje> getMensajesPorIncidencia(Long incidenciaId) {
-        return repo.findByIncidenciaIdOrderByFechaEnvioAsc(incidenciaId);
+        return repo.findByIncidenciaIdOrderByFechaAsc(incidenciaId);
     }
 }

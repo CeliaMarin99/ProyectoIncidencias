@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +47,12 @@ public class UsuarioController {
     public ResponseEntity<?> obtenerUsuarioActual(Authentication authentication) {
         String username = (String) authentication.getPrincipal(); // <--- el principal es un String
         return ResponseEntity.status(HttpStatus.OK).body(service.findByUsername(username));
+    }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<Usuario> getByUsername(@PathVariable String username) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.findByUsername(username));
+            
     }
 
 }

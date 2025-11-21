@@ -8,34 +8,33 @@
 <body>
     <app-navbar></app-navbar>
     <!--MAIN-->
-    <main class="container">
-          
-    <!--Título-->
-    <div class="row my-4">
-      <div class="col">
-        <h1 class="fw-bold">Enviar mensaje</h1>
-      </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <form>
-                <div class="mb-3">
-                    <label for="receptor" class="form-label">Para:</label>
-                    <input type="text" class="form-control" id="receptor" name="receptor" placeholder="Nombre del usuario">
-                </div>
-                <div class="mb-3">
-                    <label for="asunto" class="form-label">ID incidencia:</label>
-                    <input type="text" class="form-control" id="incidencia" name="incidencia" placeholder="Ingrese el ID de la incidencia">
-                </div>
-                <div class="mb-3">
-                    <label for="mensaje" class="form-label">Mensaje</label>
-                    <textarea class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Escriba su mensaje aquí"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </form>
+    <main class="container">   
+        <!--Título-->
+        <div class="row my-4">
+        <div class="col">
+            <h1 class="fw-bold">Enviar mensaje</h1>
         </div>
-    </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <form (ngSubmit)="enviarMensaje()">
+                    <div class="mb-3">
+                        <label for="receptor" class="form-label">Para:</label>
+                        <input [(ngModel)]="mensaje.receptor.username" type="text" class="form-control" id="receptor" name="receptor" placeholder="Nombre del usuario">
+                    </div>
+                    <div class="mb-3">
+                        <label for="asunto" class="form-label">ID incidencia:</label>
+                        <input [(ngModel)]="mensaje.incidencia.id" type="text" class="form-control" id="incidencia" name="incidencia" placeholder="Ingrese el ID de la incidencia">
+                    </div>
+                    <div class="mb-3">
+                        <label for="mensaje" class="form-label">Mensaje</label>
+                        <textarea [(ngModel)]="mensaje.contenido" class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Escriba su mensaje aquí"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </div>
     </main>
 </body>
 </html>

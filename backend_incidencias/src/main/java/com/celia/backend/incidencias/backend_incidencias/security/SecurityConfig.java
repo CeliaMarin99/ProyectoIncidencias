@@ -45,7 +45,7 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests((authz) -> authz
-        .requestMatchers("/users", "/users/registrar", "/incidencias/**").permitAll()
+        .requestMatchers("/users/**", "/incidencias/**").permitAll()
         .requestMatchers("/users/usuario-actual").authenticated()
         .anyRequest().authenticated())
         .addFilter(new JwtAuthenticationFilter(authenticationManager()))

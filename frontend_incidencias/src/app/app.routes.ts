@@ -7,6 +7,7 @@ import { EditarIncidenciaComponent } from './pages/editar-incidencia/editar-inci
 import { TecnicoHomeComponent } from './pages/tecnico/tecnico-home/tecnico-home.component';
 import { UsuarioGuard } from './services/usuario.guard';
 import { AsignarIncidenciasComponent } from './pages/tecnico/asignar-incidencias/asignar-incidencias.component';
+import { EnviarMensajeComponent } from './pages/enviar-mensaje/enviar-mensaje.component';
 
 
 export const routes: Routes = [
@@ -19,9 +20,9 @@ export const routes: Routes = [
     ]
   },
 
-   //Rutas páginas usuario
+   //Rutas páginas empledado
   {
-    path: 'user',
+    path: 'empleado',
     children: [
       { path: 'home', component: HomeClientComponent, /*canActivate: [UsuarioGuard]*/ },
       { path: 'crear', component: CrearIncidenciaComponent ,/*canActivate: [UsuarioGuard]*/ },
@@ -35,7 +36,14 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: TecnicoHomeComponent},
       { path: 'asignar', component: AsignarIncidenciasComponent},
+    ]
+  },
 
+    //Rutas comunes
+  {
+    path: 'user',
+    children: [
+      { path: 'enviar', component: EnviarMensajeComponent}
     ]
   },
 
