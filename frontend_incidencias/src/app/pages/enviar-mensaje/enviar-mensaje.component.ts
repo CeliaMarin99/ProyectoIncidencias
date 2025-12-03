@@ -5,12 +5,13 @@ import { MensajesService } from '../../services/mensajes.service';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-enviar-mensaje',
-  imports: [NavbarComponent, FormsModule],
+  imports: [NavbarComponent, FormsModule, CommonModule],
   templateUrl: './enviar-mensaje.component.html',
-  styleUrl: './enviar-mensaje.component.scss'
+  styleUrl: './enviar-mensaje.component.css'
 })
 
 export class EnviarMensajeComponent implements OnInit {
@@ -49,7 +50,7 @@ export class EnviarMensajeComponent implements OnInit {
     next: (receptorEncontrado) => {
       
       // Asignar el ID real del receptor
-      this.mensaje.receptor.id = receptorEncontrado.id;
+      this.mensaje.receptor.id = receptorEncontrado.id!;
 
       //Enviar ahora el mensaje
       this.mensajesService.enviarMensaje(this.mensaje).subscribe({

@@ -4,81 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear</title>
+    <link rel="stylesheet" href="crear-incidencia.component.css">
 </head>
-<body>
+<body class="bg-primario">
    
    <app-navbar></app-navbar>
 
-      <main class="container">
+      <main class="container bg-primario text-white min-vh-100 p-4">
             <div class="row">
                 <div class="col my-4">
                     <h1>Reportar Incidencia</h1>
                 </div>
             </div>
+                <div class="card p-4">
+                            <form (ngSubmit)="crearIncidencia()">
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="titulo" class="form-label">Título*:</label>
+                                        <input [(ngModel)]="incidencia.titulo" #titulo="ngModel" type="text" class="form-control" name="titulo" id="titulo" placeholder="Ingrese el título de la incidencia" required>
+                                        <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)">
+                                            <p *ngIf="titulo.errors?.['required']" class="text-danger">Campo obligatorio.</p>
+                                        </div>
+                                    </div>
 
-            <div class="row ">
-                <div class="col box-shadow">
-                    <form (ngSubmit)="crearIncidencia()">
-                        <div class="row">
-                            <div class="col mb-3">
-                                <label for="titulo" class="form-label">Título*</label>
-                                <input [(ngModel)]="incidencia.titulo" type="text" class="form-control" name="titulo" id="titulo" placeholder="Ingrese el título de la incidencia">
-                            </div>
+                                    <div class="col mb-3">
+                                        <label for="fecha" class="form-label">Fecha*:</label>
+                                        <input [(ngModel)]="incidencia.fecha" #fecha="ngModel" type="date" class="form-control" name="fecha" id="fecha" required>
+                                        <div *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)">
+                                            <p *ngIf="fecha.errors?.['required']" class="text-danger">Campo obligatorio.</p>
+                                        </div>
+                                    </div>
 
-                            <div class="col mb-3">
-                                <label for="fecha" class="form-label">Fecha*</label>
-                                <input [(ngModel)]="incidencia.fecha" type="date" class="form-control" name="fecha" id="fecha">
-                            </div>
+                                    <div class="col mb-3">
+                                        <label for="lugar" class="form-label">Lugar*:</label>
+                                        <input [(ngModel)]="incidencia.lugar" #lugar="ngModel" type="text" class="form-control" name="lugar" id="lugar" placeholder="¿Dónde ocurrió?">
+                                        <div *ngIf="lugar.invalid && (lugar.dirty || lugar.touched)">
+                                            <p *ngIf="lugar.errors?.['required']" class="text-danger">Campo obligatorio.</p>
+                                        </div>
+                                    </div>
+                                </div>
 
-                              <div class="col mb-3">
-                                <label for="lugar" class="form-label">Lugar*</label>
-                                <input [(ngModel)]="incidencia.lugar"  type="text" class="form-control" name="lugar" id="lugar" placeholder="¿Dónde ocurrió?">
-                            </div>
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <label for="prioridad" class="form-label">Nivel de Prioridad*:</label>
+                                            <select [(ngModel)]="incidencia.prioridad" #prioridad="ngModel" name="prioridad" class="form-select" id="prioridad" required>
+                                                <option selected>Seleccione la prioridad</option>
+                                                <option value="Grave">Grave</option>
+                                                <option value="Moderado">Moderado</option>
+                                                <option value="Leve">Leve</option>
+                                            </select>
+                                            <div *ngIf="prioridad.invalid && (prioridad.dirty || prioridad.touched)">
+                                                <p *ngIf="prioridad.errors?.['required']" class="text-danger">Campo obligatorio.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col mb-3">
+                                            <label for="categoria" class="form-label">Categoría*:</label>
+                                            <select [(ngModel)]="incidencia.categoria" #categoria="ngModel" class="form-select" id="categoria" name="categoria">
+                                                <option selected>Seleccione la categoría</option>
+                                                <option value="Software">Software</option>
+                                                <option value="Hardware">Hardware</option>
+                                                <option value="Red">Red</option>
+                                                <option value="Cuenta de Usuario">Cuenta de Usuario</option>
+                                                <option value="Otros">Otros</option>
+                                            </select>
+                                            <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)">
+                                                <p *ngIf="categoria.errors?.['required']" class="text-danger">Campo obligatorio.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <label for="descripcion" class="form-label">Descripción*:</label>
+                                            <textarea [(ngModel)]="incidencia.detalles" #detalles="ngModel" class="form-control" name="detalles" id="detalles" rows="4" placeholder="Describa la incidencia"></textarea>
+                                            <div *ngIf="detalles.invalid && (detalles.dirty || detalles.touched)">
+                                                <p *ngIf="detalles.errors?.['required']" class="text-danger">Campo obligatorio.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="imagen" class="form-label">Subir imagen (Opcional)</label>
+                                            <input (change)="onFileSelected($event)"  type="file" class="form-control" name="imagen">
+                                        </div>
+                                    </div>
+                                    
+                                        
+
+                                <button type="submit" class="btn btn-primary">Reportar Incidencia</button>
+                            </form>
                         </div>
-
-                            <div class="row">
-                                <div class="col mb-3">
-                                    <label for="prioridad" class="form-label">Nivel de Prioridad:</label>
-                                    <select [(ngModel)]="incidencia.prioridad" name="prioridad" class="form-select" id="prioridad">
-                                        <option selected>Seleccione la prioridad</option>
-                                        <option value="Grave">Grave</option>
-                                        <option value="Moderado">Moderado</option>
-                                        <option value="Leve">Leve</option>
-                                    </select>
-                                </div>
-
-                                <div class="col mb-3">
-                                    <label for="categoria" class="form-label">Categoría:</label>
-                                    <select [(ngModel)]="incidencia.categoria" class="form-select" id="categoria" name="categoria">
-                                        <option selected>Seleccione una categoría</option>
-                                        <option value="Software">Software</option>
-                                        <option value="Hardware">Hardware</option>
-                                        <option value="Red">Red</option>
-                                        <option value="Cuenta de Usuario">Cuenta de Usuario</option>
-                                        <option value="Otros">Otros</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col mb-3">
-                                    <label for="descripcion" class="form-label">Descripción</label>
-                                    <textarea [(ngModel)]="incidencia.detalles" class="form-control" name="detalles" id="detalles" rows="4" placeholder="Describa la incidencia"></textarea>
-                                </div>
-
-                                <div class="col">
-                                    <label for="imagen" class="form-label">Subir imagen (Opcional)</label>
-                                    <input  type="file" class="form-control" id="imagen">
-                                </div>
-
-                            </div>
-                                
-
-                        <button type="submit" class="btn btn-primary">Reportar Incidencia</button>
-                    </form>
-                </div>
-            </div>
-
+                   
             
       </main>
 

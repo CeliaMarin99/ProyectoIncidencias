@@ -1,46 +1,57 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
-  imports: [ FormsModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  styleUrl: './signup.component.css'
 })
-export class SignupComponent implements OnInit{
+export class SignupComponent implements OnInit {
 
-  // Objeto user como propiedad del componente
   public user = {
     username: '',
     email: '',
     password: '',
     name: '',
     last_name: '',
-    phone: ''
+    phone: '',
+    roles: [] as { name: string }[],
+    admin:false
   };
 
-    constructor(private userService:UserService) { }
+  public rolSeleccionado: string = '';
 
-    ngOnInit(): void {
-        
-    }
-    
-    formSubmit() {
-      console.log(this.user);
-      if(this.user.name=='' || this.user.name==null){
-        return alert("El nombre es obligatorio");
-    }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
-    this.userService.añadirUsuario(this.user).subscribe(
-      (data)=>{
+  ngOnInit(): void {}
+
+  formSubmit() {
+    // Asignar rol elegido al usuario:
+    this.user.roles = [
+      { name: this.rolSeleccionado }
+    ];
+
+    console.log("Usuario enviado:", this.user);
+
+    this.userService.register(this.user, this.rolSeleccionado).subscribe(
+      (data) => {
         console.log(data);
-        alert("Usuario registrado con éxito");
-      }, (error)=>{
-        console.log(error);
-        alert("Error al registrar el usuario");
+        alert('Usuario registrado con éxito');
+        this.router.navigate(['/auth/login']);
+      },
+      (error) => {
+        console.error(error);
+        alert("Ya existe ese nombre se usuario, por favor elija otro.");
       }
-    )
+    );
   }
 
 }
+

@@ -1,0 +1,135 @@
+
+#sidebar-toggle {
+    display: none;
+}
+
+#sidebar-toggle:checked ~ .sidebar {
+    left: -100%;
+}
+
+#sidebar-toggle:checked ~ .main-content header {
+    left: 0;
+    width: 100%;
+    right: 0;
+}
+
+#sidebar-toggle:checked ~ .main-content {
+    margin-left: 0;
+}
+
+.sidebar {
+    width: 280px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    padding: 1rem 1.5rem;
+    padding-left: 1rem;
+    background-color: #004A59;
+    color: white;
+    transition: left 300ms;
+}
+
+.sidebar-brand {
+    height: 100px;
+    
+}
+
+.brand-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-icons {
+    margin-left: .5rem;
+}
+
+.sidebar-user {
+    margin: 1rem 0rem;
+    text-align: center;
+}
+
+.sidebar-user img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+
+    border-left: 2px solid #efefef;
+    border-right: 2px solid #efefef;
+    border-bottom: 2px solid #efefef;
+    border-top: 2px solid transparent;
+
+}
+
+.sidebar-user h3 {
+    font-size: 1rem;
+}
+
+.sidebar-user span {
+
+    font-size: 8.rem;
+}
+
+.sidebar-menu {
+    margin-top: 2rem;
+}
+
+.sidebar-menu li {
+    margin-bottom: .8rem;
+}
+
+.sidebar-menu li a {
+    color: #efefef;
+    font-size: .9rem;
+    align-items: center;
+}
+
+.menu-head {
+    text-transform: uppercase;
+    color: #8da2fb;
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.main-content {
+    padding-left: 1rem;
+    margin-left: 280px;
+    transition: margin-left 300ms;
+}
+
+header {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #efefef;
+    padding: 1rem 1.5rem;
+    transition: left 300ms;
+}
+
+.menu-toggle label{
+
+    height: 60px;
+    width: 60px;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    transition: .7s;
+}
+
+.menu-toggle label:hover{
+  background-color: #48cee9;
+
+}
+
+.nav-itemm {
+    transition: .7s;
+}
+
+.nav-itemm:hover{
+    background-color: #48cee9;
+    border-radius: 5px;
+}
+

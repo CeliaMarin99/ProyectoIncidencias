@@ -3,38 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../styles.css">
     <title>Enviar mensaje</title>
 </head>
-<body>
+<body class="bg-primario">
     <app-navbar></app-navbar>
     <!--MAIN-->
-    <main class="container">   
+    <main class="container min-vh-100">   
         <!--Título-->
         <div class="row my-4">
         <div class="col">
-            <h1 class="fw-bold">Enviar mensaje</h1>
+            <h1 class="fw-bold text-light">Enviar mensaje</h1>
         </div>
         </div>
 
         <div class="row">
             <div class="col-md-6">
-                <form (ngSubmit)="enviarMensaje()">
-                    <div class="mb-3">
-                        <label for="receptor" class="form-label">Para:</label>
-                        <input [(ngModel)]="mensaje.receptor.username" type="text" class="form-control" id="receptor" name="receptor" placeholder="Nombre del usuario">
-                    </div>
-                    <div class="mb-3">
-                        <label for="asunto" class="form-label">ID incidencia:</label>
-                        <input [(ngModel)]="mensaje.incidencia.id" type="text" class="form-control" id="incidencia" name="incidencia" placeholder="Ingrese el ID de la incidencia">
-                    </div>
-                    <div class="mb-3">
-                        <label for="mensaje" class="form-label">Mensaje</label>
-                        <textarea [(ngModel)]="mensaje.contenido" class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Escriba su mensaje aquí"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </form>
+                
+                        <form (ngSubmit)="enviarMensaje()">
+                            <div class="row">   
+                                <div class=" col-6 mb-3">
+                                    <label for="receptor" class="form-label text-light">Para:</label>
+                                    <input [(ngModel)]="mensaje.receptor.username" #username="ngModel" type="text" class="form-control" id="receptor" name="receptor" placeholder="Nombre del usuario" required>
+                                    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="mt-3">
+                                        <p *ngIf="contenido.errors?.['required']" class="alert alert-danger">Debe poner un destinatario</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label for="asunto" class="form-label text-light">ID incidencia:</label>
+                                    <input [(ngModel)]="mensaje.incidencia.id" #incidencia="ngModel" type="text" class="form-control" id="incidencia" name="incidencia" placeholder="Ingrese el ID de la incidencia" required>
+                                    <div *ngIf="incidencia.invalid && (incidencia.dirty || incidencia.touched)" class="mt-3">
+                                        <p *ngIf="incidencia.errors?.['required']" class="alert alert-danger">Debe añadir el ID de la incidencia</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="mensaje" class="form-label text-light">Mensaje:</label>
+                                    <textarea [(ngModel)]="mensaje.contenido" #contenido="ngModel" class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Escriba su mensaje aquí" required></textarea>
+                                    <div *ngIf="contenido.invalid && (contenido.dirty || contenido.touched)" class="mt-3">
+                                        <p *ngIf="contenido.errors?.['required']" class="alert alert-danger">¡No puede enviar un mensaje en blanco!</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primario">Enviar</button>
+                                </div>
+                            </div>
+                        </form>
+                   
+                </div> 
             </div>
-        </div>
+      
+            
     </main>
 </body>
 </html>

@@ -54,7 +54,9 @@ public class IncidenciaServiceImpl implements IncidenciaServicio{
             Incidencia incidenciaDB = incidencia.orElseThrow();
             incidenciaDB.setTitulo(i.getTitulo());
             incidenciaDB.setDetalles(i.getDetalles());
+            incidenciaDB.setCategoria(i.getCategoria());
             incidenciaDB.setFecha(i.getFecha());
+            incidenciaDB.setEstado(i.getEstado());
             incidenciaDB.setPrioridad(i.getPrioridad());
             incidenciaDB.setEmpleado(i.getEmpleado());
             incidenciaDB.setTecnico(i.getTecnico());
@@ -68,7 +70,6 @@ public class IncidenciaServiceImpl implements IncidenciaServicio{
     }
 
    
-
     @Override
     public Optional<Incidencia> findById(Long id) {
        return repositorio.findById(id);

@@ -3,47 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../styles.scss">
     <title>Document</title>
+    <link rel="stylesheet" href="../../../styles.css">
 </head>
-<body>
-   <div class="container-fluid bg-primary min-vh-100 d-flex justify-content-center align-items-center">
-    <div class="card p-4 shadow">
-        <h2 class="text-center mb-4">Regístrate</h2>
-        <form (ngSubmit)="formSubmit()">
-          
-            <div class="d-flex gap-3">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nombre</label>
-                    <input [(ngModel)]="user.name" name="name" type="text" class="form-control" id="name" placeholder="Escriba su nombre">
-                </div>
-                <div class="mb-3">
-                    <label for="last_name" class="form-label">Apellidos</label>
-                    <input [(ngModel)]="user.last_name" name="last_name" type="last_name" class="form-control" id="lastName" placeholder="Escriba su apellido">
-                </div>
-            </div>
+<body class="bg-primario">
 
-            <div class="d-flex gap-3">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Nombre de Usuario</label>
-                    <input [(ngModel)]="user.username" name="username" type="text" class="form-control" id="username" placeholder="Enter username">
+ <div class="d-flex">
+    <a [routerLink]="'/auth/login'" class="ms-auto text-naranja text-decoration-none mt-3 px-4 fs-5 fw-normal"> Volver a iniciar sesión</a>
+ </div>
+   <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
+
+    
+    <div class="row d-flex">
+        <div class="col d-flex justify-content-center align-items-center bg-gradiente">
+            <img src="img/developer.png" alt="" class="img-fluid">
+        </div>
+        
+        <div class="col-md-6 bg-body p-4">
+                    
+                        <h2 class=" mb-4 text-azul">Regístrate</h2>
+                        <form (ngSubmit)="formSubmit()">
+                        
+                            <div class="row d-flex gap-4">
+                                <div class="col mb-3">
+                                    <label for="name" class="form-label">Nombre*:</label>
+                                    <input [(ngModel)]="user.name" #name="ngModel" name="name" type="text" class="form-control" id="name" pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$" placeholder="Escriba su nombre" required>
+                                    <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                                        <p *ngIf="name.errors?.['required']" class="text-danger">El nombre es obligatorio.</p>
+                                        <p *ngIf="name.errors?.['pattern']" class="text-danger">Sólo se admiten letras.</p>
+                                    </div>
+                                </div>
+
+                                <div class="col mb-3">
+                                    <label for="last_name" class="form-label">Apellidos*:</label>
+                                    <input [(ngModel)]="user.last_name" #last_name="ngModel" name="last_name" type="last_name" class="form-control" id="lastName"  pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$" placeholder="Escriba sus apellidos" required>
+                                    <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)" class="error">
+                                    <p *ngIf="last_name.errors?.['required']" class="text-danger">Los apellidos son obligatorios.</p>
+                                    <p *ngIf="last_name.errors?.['pattern']" class="text-danger">Sólo se admiten letras.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex gap-3">
+                                <div class="col mb-3">
+                                    <label for="username" class="form-label">Nombre de Usuario*:</label>
+                                    <input [(ngModel)]="user.username" #username="ngModel" name="username" type="text" class="form-control" id="username"  pattern="^[a-zA-Z0-9_-]{3,16}$" placeholder="Nombre de Usuario" required>
+                                    <div *ngIf="username.invalid && (username.dirty || username.touched)">
+                                    <p *ngIf="username.errors?.['required']" class="text-danger">El nombre de usuario es obligatorio.</p>
+                                    <p *ngIf="username.errors?.['pattern']" class="text-danger">Sólo se admiten letras, números y guiones.</p>
+                                    </div>
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="email" class="form-label">Email*:</label>
+                                    <input [(ngModel)]="user.email" #email="ngModel" name="email" type="email" class="form-control" id="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Escriba su correo" required>
+                                    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                                    <p *ngIf="email.errors?.['required']" class="text-danger">El email es obligatorio.</p>
+                                    <p *ngIf="email.errors?.['pattern']" class="text-danger">Formato de email incorrecto.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex gap-3">
+                                <div class="col mb-3">
+                                    <label for="phone" class="form-label">Teléfono:</label>
+                                    <input [(ngModel)]="user.phone" #phone="ngModel" name="phone" class="form-control" id="phone" pattern="^[6-9][0-9]{8}$" placeholder="Escriba su teléfono">
+                                    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                                    <!--<p *ngIf="phone.errors?.['required']" class="text-danger">El email es obligatorio.</p>-->
+                                    <p *ngIf="phone.errors?.['pattern']" class="text-danger">Formato de teléfono incorrecto.</p>
+                                    </div>
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="rol" class="form-label">Tipo de Usuario*:</label>
+                                    <select [(ngModel)]="rolSeleccionado" name="rolSeleccionado" id="rolSeleccionado" class="form-select " required>
+                                        <option value="" disabled selected>Seleccione un tipo..</option>
+                                        <option value="USUARIO">Usuario</option>
+                                        <option value="TECNICO">Técnico</option>
+                                    </select>
+                                </div>
+                            </div>
+                                
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Contraseña*:</label>
+                                        <input [(ngModel)]="user.password" #password="ngModel" name="password" type="password" class="form-control" placeholder="Escriba su contraseña" minlength="8" required>
+                                        <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                                        <p *ngIf="password.errors?.['required']" class="text-danger">La contraseña es obligatoria.</p>
+                                        <p *ngIf="password.errors?.['minlength']" class="text-danger">Debe de tener mínimo 8 caracteres.</p>
+                                    </div>
+                                    </div>
+                                    
+                                        <button type="submit" class="btn btn-primario">Registrarse</button>
+                        </form>
+                
                 </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input [(ngModel)]="user.email" name="email" type="email" class="form-control" id="email">
-                </div>
-            </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Teléfono</label>
-                        <input [(ngModel)]="user.phone" name="phone" type="phone" class="form-control" id="phone">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input [(ngModel)]="user.password" name="password" type="password" class="form-control" id="password">
-                    </div>
-            <button type="submit" class="btn bg-primary w-100">Registrarse</button>
-        </form>
-    </div>
+        </div>
 
    </div>
 </body>

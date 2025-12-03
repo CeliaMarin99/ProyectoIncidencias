@@ -12,6 +12,11 @@ public interface MensajeRepositorio extends JpaRepository<Mensaje, Long> {
 
     List<Mensaje> findByEmisorIdOrderByFechaDesc(Long emisorId);
 
-    List<Mensaje> findByIncidenciaIdOrderByFechaAsc(Long incidenciaId);
+    //Buscar mensajes enviados por incidencia
+    List<Mensaje> findByIncidenciaIdAndEmisorIdOrderByFechaDesc(long idIncidencia, Long idEmisor);
+
+    //Buscar mensajes recibidos por incidencia
+    List<Mensaje> findByIncidenciaIdAndReceptorIdOrderByFechaDesc(long idIncidencia, Long idEmisor);
+
 }
 

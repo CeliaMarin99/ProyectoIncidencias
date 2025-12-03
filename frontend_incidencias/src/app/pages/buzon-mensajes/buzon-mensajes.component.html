@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+    <app-navbar></app-navbar>
+    <!--MAIN-->
+    <main>
+        <div class="container min-vh-100">
+            <div class="row my-4 ">
+                <div class="col">
+                    <h1 class="fw-bold text-light">Buzón de mensajes</h1>
+                </div>
+            </div>
+
+            <div class="row d-flex">
+                <div class="col">
+                    <button [ngClass]="filtro === 'enviados' ? 'btn-primario' : 'btn-light'" (click)="mostrarMensajes('enviados')" class="btn text-azul" style="margin-right: 30px;">Enviados</button>
+                    <button [ngClass]="filtro === 'recibidos' ? 'btn-primario' : 'btn-light'" (click)="mostrarMensajes('recibidos')" class="btn text-azul">Recibidos</button>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <form action="">
+                    <div class="row">
+                        <div class="col-6 col-md-5">
+                            <input [(ngModel)]="idIncidencia" name="idIncidencia" type="text" class="form-control" placeholder="Escribe id de la incidencia">
+                        </div>
+                    
+                        <div class="col">
+                            <button (click)="buscarMensajesPorIncidencia()" class="btn btn-primario">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row mt-5">
+                <div *ngFor="let mensaje of mensajes" class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="micard-title py-3 px-3">
+                            <h4 class="text-primario fs-5">{{mensaje.incidencia?.id}}</h4>
+                            <p class="text-primario fs-6">{{mensaje.fecha}}</p>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="card-body micard-users text-primario">
+                            <p class="mb-2">Para: {{mensaje.receptor.username}}</p>
+                            <p>De: {{mensaje.emisor.username}}</p>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="card-body text-primario">
+                            <p>{{mensaje.contenido}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+    </main>
+</body>
+</html>

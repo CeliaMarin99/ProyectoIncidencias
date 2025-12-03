@@ -63,14 +63,26 @@ export class LoginService {
   //Obtenemos el rol del usuario
   public getUserRole(){
   const user = this.getUser();
-  if (user && user.roles && user.roles.length > 0) {
-    return user.roles[0].name; // ✅ Usamos 'name' porque así se llama en el backend
+  if (user.roles[0].name == "ROLE_ADMIN"){
+    return user.roles[1].name;
+  }else{
+    return user.roles[0].name;
   }
   return null;
 }
 
   public getCurrentUser(){
     return this.http.get(`${baseUrl}/users/usuario-actual`);
+  }
+
+  //Es admin
+  public esAdmin(){
+    const user = this.getUser();
+    if(user.roles.length > 1){
+      return true;
+    }
+
+    return false;
   }
 
 

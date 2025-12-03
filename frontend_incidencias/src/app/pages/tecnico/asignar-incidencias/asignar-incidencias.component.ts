@@ -1,18 +1,34 @@
 import { Component } from '@angular/core';
 import { IncidenciaService } from '../../../services/incidencia.service';
 import { LoginService } from '../../../services/login.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Incidencia } from '../../../Models/incidencia';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from '../../../layout/navbar/navbar.component';
 
 @Component({
   selector: 'app-asignar-incidencias',
-  imports: [NgFor],
+  imports: [NgFor, CommonModule, FormsModule, NavbarComponent],
   templateUrl: './asignar-incidencias.component.html',
-  styleUrl: './asignar-incidencias.component.scss'
+  styleUrl: './asignar-incidencias.component.css'
 })
 export class AsignarIncidenciasComponent {
   incidencias: Incidencia[] = [];
+
+  palabraClave: string = '';
+
+   selectedIncidencia: Incidencia = {
+    titulo: '',
+    prioridad: '',
+    estado: '',
+    lugar: '',
+    categoria: '',
+    detalles: '',
+    photo: '',
+    fecha: '',
+    empleado: { id: 0 }  // ← se rellena automáticamente con el usuario logeado
+  };
 
   constructor(
     private incidenciaService: IncidenciaService,
@@ -51,4 +67,22 @@ export class AsignarIncidenciasComponent {
       } 
     });
   }
+
+  //Abrir Modal detalles
+     openDetallesModal(incidencia: Incidencia) {
+        this.selectedIncidencia = JSON.parse(JSON.stringify(incidencia)); 
+      }
+
+    //metodo buscar incidencia
+    buscarIncidencia(palabraClave: string): void {
+      this.incidenciaService.buscarIncidencia(palabraClave).subscribe({
+        next: (data) => {
+          this.incidencias = data;
+          console.log('Incidencias encontradas:', data);
+        },
+        error: (err) => {
+          console.error('Error al buscar incidencias', err);
+        }
+      });
+    }
 }

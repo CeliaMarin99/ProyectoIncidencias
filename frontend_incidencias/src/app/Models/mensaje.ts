@@ -6,7 +6,7 @@ export interface mensaje {
         id: number; // solo necesitas el id del empleado que reporta
         username?: string;
     }
-    emisor?: {
+    emisor: {
         id: number; // opcional: solo se enviará cuando se asigne un técnico
         username?: string;
     }

@@ -4,13 +4,14 @@ import { IncidenciaService } from '../../services/incidencia.service';
 import { NavbarComponent } from "../../layout/navbar/navbar.component";
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-crear-incidencia',
-  imports: [NavbarComponent, FormsModule],
+  imports: [NavbarComponent, FormsModule, CommonModule],
   templateUrl: './crear-incidencia.component.html',
-  styleUrl: './crear-incidencia.component.scss'
+  styleUrl: './crear-incidencia.component.css'
 })
 export class CrearIncidenciaComponent implements OnInit{
 
@@ -44,6 +45,8 @@ export class CrearIncidenciaComponent implements OnInit{
     
     console.log('Datos a enviar:', this.incidencia);
 
+    this.incidencia.estado = 'Sin Empezar';
+
     this.incidenciaService.reportarIncidencia(this.incidencia).subscribe({
       next: (response) => {
         console.log('Incidencia creada:', response);
@@ -53,6 +56,12 @@ export class CrearIncidenciaComponent implements OnInit{
         console.error('Error al crear incidencia:', err);
       }
     });
+  }
+
+  imagenSeleccionada: File | null = null;
+
+  onFileSelected(event: any) {
+    this.imagenSeleccionada = event.target.files[0];
   }
 
 }

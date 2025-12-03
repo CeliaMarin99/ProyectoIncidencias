@@ -3,6 +3,7 @@ package com.celia.backend.incidencias.backend_incidencias.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.celia.backend.incidencias.backend_incidencias.validation.ExistsByUsername;
 //import com.celia.backend.incidencias.backend_incidencias.validation.ExistsByUsername;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -28,10 +29,11 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//AUTOINCLEMENTABLE
     private Long id;
 
-    @Column(unique = true)
+  
 
-    //@ExistsByEmail crea problemas al crear usuario
+    @ExistsByUsername 
     @NotBlank
+    @Column(unique = true)
     private String username;
 
     @NotBlank

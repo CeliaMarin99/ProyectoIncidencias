@@ -1,0 +1,80 @@
+.profile-area {
+    padding: 80px 0;
+}
+
+.micard {
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.card:hover .img2 img {
+    border-color: darkcyan;
+    transition: .7s;
+}
+
+.prioridad-grave {
+    background-color: #ca3434;
+}
+
+.prioridad-moderada {
+    background-color: #e6ac57;
+}
+
+.prioridad-leve {
+    background-color: #49be7a;
+}
+
+
+
+.img1 {
+    height: 140px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+}
+
+.card-header-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.3rem;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.card-header-content h2{
+    font-size: 18px;
+}
+.img2 img {
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 7px solid #fff;
+    margin-top: -80px;
+}
+
+.main-text {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.main-text h2 {
+    text-align: center;
+}
+
+
+.options{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
+    margin-bottom: 20px;
+}

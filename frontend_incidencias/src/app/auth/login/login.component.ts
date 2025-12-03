@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   imports: [RouterLink, FormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'] // 👈 styleUrls en plural
+  styleUrls: ['./login.component.css'] // 👈 styleUrls en plural
 })
 export class LoginComponent implements OnInit {
 
@@ -48,8 +48,6 @@ export class LoginComponent implements OnInit {
             //user dashboard
              this.router.navigate(['/empleado/home']);
              this.loginService.loginStatusSubjec.next(true);
-          }else{
-            this.loginService.logout();
           }
         }
 

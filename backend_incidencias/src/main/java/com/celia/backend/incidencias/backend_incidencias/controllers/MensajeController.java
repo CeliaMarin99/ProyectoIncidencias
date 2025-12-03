@@ -38,9 +38,14 @@ public class MensajeController {
         return ResponseEntity.ok(servicio.getMensajesEnviados(userId));
     }
 
-    @GetMapping("/incidencia/{idIncidencia}")
-    public ResponseEntity<List<Mensaje>> porIncidencia(@PathVariable Long idIncidencia) {
-        return ResponseEntity.ok(servicio.getMensajesPorIncidencia(idIncidencia));
+    @GetMapping("/incidencia-enviados/{idIncidencia}/{idEmisor}")
+    public ResponseEntity<List<Mensaje>> EnviadosporIncidencia(@PathVariable Long idIncidencia, @PathVariable Long idEmisor) {
+        return ResponseEntity.ok(servicio.getMensajesEnviadosPorIncidencia(idIncidencia, idEmisor));
+    }
+
+    @GetMapping("/incidencia-recibidos/{idIncidencia}/{idReceptor}")
+    public ResponseEntity<List<Mensaje>> RecibidosporIncidencia(@PathVariable Long idIncidencia, @PathVariable Long idReceptor) {
+        return ResponseEntity.ok(servicio.getMensajesRecibidosPorIncidencia(idIncidencia, idReceptor));
     }
 }
 

@@ -9,13 +9,28 @@ import { Usuario } from '../Models/usuario';
 })
 export class UserService {
 
-  constructor(private http:HttpClient) { }
+   private users: Usuario[] =[];
 
-  añadirUsuario(user: any) {
-  return this.http.post(`${baseUrl}/users/registrar`, user);
+  constructor(private http:HttpClient) {}
+
+  // Registrar usuario con rol
+  register(user: Usuario, rol:string): Observable<Usuario> {
+    return this.http.post<Usuario>(`${baseUrl}/users/registrar/${rol}`, user);
   }
 
   getUserByUsername(username: string): Observable<Usuario> {
   return this.http.get<Usuario>(`${baseUrl}/users/username/${username}`);
+  }
+
+  findAll():Observable<Usuario[]> {
+      return this.http.get<Usuario[]>(`${baseUrl}/users`);
+  }
+
+  editarUsuario(idUsuario: number, user:Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${baseUrl}/users/editar/${idUsuario}`, user);
+  }
+
+  eliminarUsuario(idUsuario: number): Observable<Usuario> {
+    return this.http.delete<Usuario>(`${baseUrl}/users/eliminar/${idUsuario}`);
   }
 }

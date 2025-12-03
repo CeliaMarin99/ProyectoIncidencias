@@ -30,8 +30,15 @@ public class MensajeService {
         return repo.findByEmisorIdOrderByFechaDesc(userId);
     }
 
-    //Obtiene los mensajes asociados a una incidencia específica, ordenados por fecha ascendente
-    public List<Mensaje> getMensajesPorIncidencia(Long incidenciaId) {
-        return repo.findByIncidenciaIdOrderByFechaAsc(incidenciaId);
+    //Obtiene mensajes enviados por el id de la incidencia
+    public List<Mensaje> getMensajesEnviadosPorIncidencia(Long idIncidencia, Long idEmisor){
+        return repo.findByIncidenciaIdAndEmisorIdOrderByFechaDesc(idIncidencia, idEmisor);
     }
+
+    //Obtiene mensajes recibidos por el id de la incidencia
+    public List<Mensaje> getMensajesRecibidosPorIncidencia(Long idIncidencia, Long idReceptor){
+        return repo.findByIncidenciaIdAndReceptorIdOrderByFechaDesc(idIncidencia, idReceptor);
+    }
+
+    
 }

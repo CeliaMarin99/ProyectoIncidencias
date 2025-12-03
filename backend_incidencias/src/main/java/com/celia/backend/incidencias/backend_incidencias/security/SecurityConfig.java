@@ -5,6 +5,7 @@ import java.util.Arrays;
 //import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 //import org.springframework.core.Ordered;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -45,7 +46,15 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests((authz) -> authz
-        .requestMatchers("/users/**", "/incidencias/**").permitAll()
+         .requestMatchers(HttpMethod.DELETE, "/incidencias/**")
+            .hasAnyRole("USUARIO", "ADMIN")
+
+        .requestMatchers(HttpMethod.PUT, "/incidencias/**")
+            .hasAnyRole("USUARIO", "ADMIN", "TECNICO")
+
+        .requestMatchers(HttpMethod.POST, "/incidencias/**")
+            .hasAnyRole("USUARIO", "ADMIN")
+        .requestMatchers("/users","/users/**", "/mensajes/**").permitAll()
         .requestMatchers("/users/usuario-actual").authenticated()
         .anyRequest().authenticated())
         .addFilter(new JwtAuthenticationFilter(authenticationManager()))

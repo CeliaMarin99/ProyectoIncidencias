@@ -8,6 +8,9 @@ import { TecnicoHomeComponent } from './pages/tecnico/tecnico-home/tecnico-home.
 import { UsuarioGuard } from './services/usuario.guard';
 import { AsignarIncidenciasComponent } from './pages/tecnico/asignar-incidencias/asignar-incidencias.component';
 import { EnviarMensajeComponent } from './pages/enviar-mensaje/enviar-mensaje.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { BuzonMensajesComponent } from './pages/buzon-mensajes/buzon-mensajes.component';
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 
 
 export const routes: Routes = [
@@ -20,13 +23,20 @@ export const routes: Routes = [
     ]
   },
 
+  //Rutas páginas admin
+  {
+    path: 'admin',
+    children: [
+      { path: 'home', component: DashboardComponent, /*canActivate: [UsuarioGuard]*/ },
+    ]
+  },
+
    //Rutas páginas empledado
   {
     path: 'empleado',
     children: [
       { path: 'home', component: HomeClientComponent, /*canActivate: [UsuarioGuard]*/ },
-      { path: 'crear', component: CrearIncidenciaComponent ,/*canActivate: [UsuarioGuard]*/ },
-      { path: 'editar/:id', component: EditarIncidenciaComponent /*,canActivate: [UsuarioGuard] */}
+      { path: 'crear', component: CrearIncidenciaComponent ,/*canActivate: [UsuarioGuard]*/ }
     ]
   },
   
@@ -43,7 +53,11 @@ export const routes: Routes = [
   {
     path: 'user',
     children: [
-      { path: 'enviar', component: EnviarMensajeComponent}
+      { path: 'enviar', component: EnviarMensajeComponent},
+      { path: 'perfil', component: PerfilComponent},
+      { path: 'editar/:id', component: EditarIncidenciaComponent /*,canActivate: [UsuarioGuard] */},
+      { path: 'buzon', component: BuzonMensajesComponent },
+
     ]
   },
 
