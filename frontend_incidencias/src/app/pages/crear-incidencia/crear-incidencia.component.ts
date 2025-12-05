@@ -5,6 +5,7 @@ import { NavbarComponent } from "../../layout/navbar/navbar.component";
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Incidencia } from '../../Models/incidencia';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class CrearIncidenciaComponent implements OnInit{
     empleado: { id: 0 }  // ← se rellena automáticamente con el usuario logeado
   };
 
+  selectedFile!: File;
+
    constructor(
     private incidenciaService: IncidenciaService,
     private loginService: LoginService,
@@ -41,27 +44,29 @@ export class CrearIncidenciaComponent implements OnInit{
     } 
   }
 
+  onFileSelected(event: any) {
+  this.selectedFile = event.target.files[0];
+  }
+
   crearIncidencia(): void {
-    
-    console.log('Datos a enviar:', this.incidencia);
 
     this.incidencia.estado = 'Sin Empezar';
 
-    this.incidenciaService.reportarIncidencia(this.incidencia).subscribe({
-      next: (response) => {
-        console.log('Incidencia creada:', response);
+    const formData = new FormData();
+    formData.append("incidencia", new Blob([JSON.stringify(this.incidencia)], { type: "application/json" }));
+
+    if(this.selectedFile){
+      formData.append("file", this.selectedFile);
+    }
+
+    this.incidenciaService.reportarIncidencia(formData).subscribe({
+      next: (res) => {
+        console.log("Incidencia creada", res);
         this.router.navigate(['/empleado/home']);
       },
-      error: (err) => {
-        console.error('Error al crear incidencia:', err);
-      }
+      error: err => console.log("Error", err)
     });
   }
-
-  imagenSeleccionada: File | null = null;
-
-  onFileSelected(event: any) {
-    this.imagenSeleccionada = event.target.files[0];
-  }
-
 }
+
+

@@ -23,8 +23,8 @@ export class IncidenciaService {
     return this.http.get<Incidencia[]>(`${baseUrl}/incidencias/tecnico/${idTecnico}`);
   }
   //Metodo para reportar una incidecnia
-  reportarIncidencia(incidencia: Incidencia): Observable<Incidencia> {
-    return this.http.post<Incidencia>(`${baseUrl}/incidencias/crear`, incidencia);
+  reportarIncidencia(formData: FormData): Observable<any> {
+  return this.http.post(`${baseUrl}/incidencias/crear`, formData);
   }
 
   //Modificar incidencia
@@ -61,5 +61,9 @@ export class IncidenciaService {
   asignarTecnico(idIncidencia: number, idTecnico: number): Observable<Incidencia> {
     return this.http.put<Incidencia>(`${baseUrl}/incidencias/asignar-tecnico/${idIncidencia}/tecnico/${idTecnico}`,{});
   }
+
+  getImgUrl(filename: string) {
+  return `${baseUrl}/img/${filename}`;
+}
 
 }

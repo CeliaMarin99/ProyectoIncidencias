@@ -96,4 +96,8 @@ export class HomeClientComponent implements OnInit{
         console.log("Incidencia seleccionada para borrar:", incidencia);
       }
 
+      getImagen(incidencia: Incidencia) {
+        return incidencia.photo ? this.incidenciaService.getImgUrl(incidencia.photo) : 'assets/default.png';
+      }
+
 }

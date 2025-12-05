@@ -63,6 +63,10 @@ public class SecurityConfig {
 
         .requestMatchers("/users/**").permitAll()
 
+       
+        .requestMatchers("/img/**", "/public/img/**").permitAll()
+        
+
         .requestMatchers("/users/usuario-actual").authenticated()
         .anyRequest().authenticated())
         .addFilter(new JwtAuthenticationFilter(authenticationManager()))
