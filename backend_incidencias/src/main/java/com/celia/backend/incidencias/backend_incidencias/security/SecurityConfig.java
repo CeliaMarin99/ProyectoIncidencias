@@ -54,7 +54,15 @@ public class SecurityConfig {
 
         .requestMatchers(HttpMethod.POST, "/incidencias/**")
             .hasAnyRole("USUARIO", "ADMIN")
-        .requestMatchers("/users","/users/**", "/mensajes/**").permitAll()
+        .requestMatchers(HttpMethod.GET, "incidencias/**","/users","/users/**", "/mensajes/**").permitAll()
+
+        .requestMatchers(HttpMethod.POST, "/mensajes/**").permitAll()
+
+        .requestMatchers(HttpMethod.DELETE, "/users/**")
+            .hasAnyRole("ADMIN")
+
+        .requestMatchers("/users/**").permitAll()
+
         .requestMatchers("/users/usuario-actual").authenticated()
         .anyRequest().authenticated())
         .addFilter(new JwtAuthenticationFilter(authenticationManager()))

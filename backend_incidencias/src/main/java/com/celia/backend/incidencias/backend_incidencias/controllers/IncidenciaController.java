@@ -31,6 +31,12 @@ public class IncidenciaController {
     @Autowired
     public IncidenciaServicio servicio;
 
+
+    @GetMapping //Lista todos los usuarios
+    public List<Incidencia> listar() {
+        return servicio.findAll();
+    }
+
     //Devolver todas las incidencias de un empleado
      @GetMapping("/empleado/{id}")
     public ResponseEntity<List<Incidencia>> getIncidenciasPorEmpleado(@PathVariable Long id) {
@@ -78,7 +84,7 @@ public class IncidenciaController {
     //Buscar inciencia por palabra clave
     @GetMapping("/search/{palabraClave}")
     public List<Incidencia> buscarPorPalabraClave(@PathVariable String palabraClave){
-        return servicio.findAll(palabraClave);
+        return servicio.findByPalabraClave(palabraClave);
     }
 
     //Obtener incidencias del tecnico

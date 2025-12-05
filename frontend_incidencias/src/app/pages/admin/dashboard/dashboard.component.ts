@@ -9,15 +9,16 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink, CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit{
 
   users: Usuario[] = [];
-
   usuarioActual!: Usuario;
+
+  rol: string = "";
 
   //Usuario
   selectedUser: Usuario = {
@@ -48,8 +49,12 @@ export class DashboardComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this.usuarioActual = this.login.getUser();
     this.ObtenerTodosLosUsuarios();
+    this.usuarioActual = this.login.getUser();
+
+    this.rol = this.login.getUserRole();
+
+    console.log("Rol de Usuario: ", this.rol);
   }
 
    ObtenerTodosLosUsuarios(): void {
@@ -109,13 +114,6 @@ export class DashboardComponent implements OnInit{
       }
     })
   }
-
-  //cerrar sesion
-  public logout(){
-    this.login.logout();
-    this.router.navigate(['']);
-  }
-
   //esAdmin
   public esAdmin(){
     return this.login.esAdmin();
@@ -133,6 +131,12 @@ export class DashboardComponent implements OnInit{
     }
   });
 }
+
+  //cerrar sesion
+  public logout(){
+    this.login.logout();
+    this.router.navigate(['']);
+  }
 
  
 }

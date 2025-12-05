@@ -20,8 +20,8 @@ public interface incidenciaRepositorio extends CrudRepository<Incidencia, Long>{
     List<Incidencia> findByTecnicoIsNull();//incidencias que no tienen tecnico
 
     //Buscar por palabra clave
-    @Query("SELECT i FROM Incidencia i WHERE CONCAT(i.id, i.prioridad, i.categoria, i.lugar, i.estado, i.categoria) LIKE %?1%")
-	List<Incidencia> findAll(String palabraClave);
+    @Query("SELECT i FROM Incidencia i WHERE CONCAT(i.id, i.titulo, i.prioridad, i.categoria, i.lugar, i.estado, i.categoria) LIKE %?1%")
+	List<Incidencia> findByPalabraClave(String palabraClave);
 
     
 

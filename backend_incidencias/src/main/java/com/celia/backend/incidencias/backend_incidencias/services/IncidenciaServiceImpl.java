@@ -90,8 +90,8 @@ public class IncidenciaServiceImpl implements IncidenciaServicio{
     }
 
     @Override
-    public List<Incidencia> findAll(String palabraClave) {
-        return repositorio.findAll(palabraClave);
+    public List<Incidencia> findByPalabraClave(String palabraClave) {
+        return repositorio.findByPalabraClave(palabraClave);
     }
 
     @Override
@@ -107,6 +107,11 @@ public class IncidenciaServiceImpl implements IncidenciaServicio{
             return Optional.of(repositorio.save(incidenciaDB));
         }
         return incidencia;
+    }
+
+    @Override
+    public List<Incidencia> findAll() {
+        return (List<Incidencia>) repositorio.findAll();
     }
     
     

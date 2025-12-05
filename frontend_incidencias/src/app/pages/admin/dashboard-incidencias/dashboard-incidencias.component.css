@@ -1,4 +1,8 @@
 
+body {
+                     
+    background-color: #baf5ff;
+}
 
 #sidebar-toggle {
     display: none;
@@ -112,6 +116,7 @@ header {
 
 .menu-toggle label{
 
+    background-color: #bac4ff;
     height: 60px;
     width: 60px;
     display: grid;
@@ -134,4 +139,3 @@ header {
     background-color: #48cee9;
     border-radius: 5px;
 }
-

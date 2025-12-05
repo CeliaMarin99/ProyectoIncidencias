@@ -11,6 +11,7 @@ import { EnviarMensajeComponent } from './pages/enviar-mensaje/enviar-mensaje.co
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { BuzonMensajesComponent } from './pages/buzon-mensajes/buzon-mensajes.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { DashboardIncidenciasComponent } from './pages/admin/dashboard-incidencias/dashboard-incidencias.component';
 
 
 export const routes: Routes = [
@@ -28,6 +29,8 @@ export const routes: Routes = [
     path: 'admin',
     children: [
       { path: 'home', component: DashboardComponent, /*canActivate: [UsuarioGuard]*/ },
+      { path: 'incidencias', component: DashboardIncidenciasComponent, /*canActivate: [UsuarioGuard]*/ }
+
     ]
   },
 

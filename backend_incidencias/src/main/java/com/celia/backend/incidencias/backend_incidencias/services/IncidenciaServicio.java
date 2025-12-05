@@ -18,7 +18,9 @@ public interface IncidenciaServicio {
     //modificar incidencia
     Optional<Incidencia> update(Long id, Incidencia i);
 
-    List<Incidencia> findAll(String palabraClave);
+    List<Incidencia> findByPalabraClave(String palabraClave);
+
+    List<Incidencia> findAll();
 
     Optional<Incidencia> findById(Long id);
 

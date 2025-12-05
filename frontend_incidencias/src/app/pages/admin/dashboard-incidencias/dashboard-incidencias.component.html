@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="../../../../styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
-    <script src=""></script>
+    <title>Dashboard-Incidencias</title>
 </head>
 <body>
-
     <input type="checkbox" id="sidebar-toggle">
     <!--Sidebar-->
     <div class="sidebar">
@@ -48,7 +46,7 @@
                         <span>Cuenta</span>
                     </div>
                     <ul>
-                        <li *ngIf="rol == 'ROLE_USUARIO'" class="nav-itemm">
+                       <li *ngIf="rol == 'ROLE_USUARIO'" class="nav-itemm">
                             <a  href="" [routerLink]="'/empleado/home'">
                                 <span class="las la-calendar"></span>
                                 Volver al inicio
@@ -88,16 +86,16 @@
             <div class="col-md-12">
                         <div class="row">
                              <div class="col-md-4 p-0 mb-5">
-                                <h2 class="ml-lg-2">Gestionar Empleados</h2>
+                                <h2 class="ml-lg-2">Gestionar Incidencias</h2>
                             </div>
                         </div>
-                        <div class="row" style="justify-content: space-between;">
+                        <div class="row mb-3" style="justify-content: space-between;">
                              <form class="col-md-6">
-                                <div class="row mb-3">
+                                <div class="row">
                                     <div class="col d-flex" style="gap: 1rem;">
                                         <label style="align-self: center;" for="" class="form-label">Buscar:</label>
-                                        <input [(ngModel)]="username" type="text" class="form-control" name="username" placeholder="Escribe el nombre de usuario..">
-                                        <button (click)="buscarPorUsername()" class="btn btn-primary">Buscar</button>
+                                        <input [(ngModel)]="palabraClave" type="text" class="form-control" name="palabraClave" placeholder="Buscar incidencia..">
+                                        <button (click)="buscarIncidencia()" class="btn btn-primary">Buscar</button>
                                     </div>
                                     
                                 </div>
@@ -108,51 +106,46 @@
                      <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Username</th>
-                                <th>correo</th>
-                                <th>teléfono</th>
-                                <th>Roles</th>
+                                <th>ID</th>
+                                <th>Título</th>
+                                <th>Categoría</th>
+                                <th>Fecha</th>
+                                <th>Prioridad</th>
+                                <th>Estado</th>
+                                <th>Autor</th>
+                                <th>Técnico</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr *ngFor="let user of users | slice:(currentPage - 1) * pageSize:(currentPage * pageSize)">
-                                <td>{{user.name}}</td>
-                                <td>{{user.last_name}}</td>
-                                <td>{{user.username}}</td>
-                                <td>{{user.email}}</td>
-                                <td>{{user.phone}}</td>
+                            <tr *ngFor="let incidencia of incidencias | slice:(currentPage - 1) * pageSize:(currentPage * pageSize)">
+                                <td>{{incidencia.id}}</td>
+                                <td>{{incidencia.titulo}}</td>
+                                <td>{{incidencia.categoria}}</td>
+                                <td>{{incidencia.fecha}}</td>
+                                <td>{{incidencia.prioridad}}</td>
+                                <td>{{incidencia.estado}}</td>
+                                <td>{{incidencia.empleado.username}}</td>
+                                <td>{{incidencia.tecnico ? incidencia.tecnico.username : 'Sin asignar'}}</td>
+                        
                                 <td>
-
-                                    <span 
-                                    *ngFor="let r of user.roles" 
-                                    class="badge bg-primary me-1">
-                                    {{ r.name.replace('ROLE_', '').toLowerCase() | titlecase }}
-                                    </span>
-
-                                </td>
-                                <td>
-                                    <a href="#" class="edit px-2" (click)="openEditModal(user)"  data-bs-toggle="modal" data-bs-target="#editarUsuarioModal">
+                                    <a href="#" class="edit px-2" (click)="openEditModal(incidencia)"  data-bs-toggle="modal" data-bs-target="#editarIncidenciaModal">
                                     <i class="bi bi-pencil-square text-azul fs-5" title="Editar"></i>
                                     </a>
                                 
                                     <a 
                                     class="delete" 
                                     href="#"
-                                    (click)="openDeleteModal(user)" 
+                                    (click)="openDeleteModal(incidencia)" 
                                     data-bs-toggle="modal" 
-                                    data-bs-target="#eliminarUsuarioModal">
+                                    data-bs-target="#eliminarIncidenciaModal">
                                         <i class="bi bi-x-circle-fill text-danger fs-5" data-bs-toggle="tooltip" title="Borrar"></i>
                                     </a>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
-                   
 
                     <!-- PAGINACIÓN -->
                     <nav class="d-flex">
@@ -180,13 +173,13 @@
                     </nav>    
 
                   <!-- MODAL EDITAR USUARIO -->
-                <div class="modal fade" id="editarUsuarioModal" tabindex="-1">
+                <div class="modal fade" id="editarIncidenciaModal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content" style="background-color: #bac4ff;">
 
                     <!-- HEADER -->
                     <div class="modal-header">
-                        <h5 class="modal-title">Editar Usuario</h5>
+                        <h5 class="modal-title">Editar Incidencia</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
@@ -196,41 +189,45 @@
 
                         <div class="row mb-3">
                             <div class="col">
-                            <label class="form-label">Nombre</label>
-                            <input type="text" class="form-control" [(ngModel)]="selectedUser.name" name="name">
+                            <label class="form-label">Título:</label>
+                            <input type="text" class="form-control" [(ngModel)]="selectedIncidencia.titulo" name="titulo">
                             </div>
                             <div class="col">
-                            <label class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" [(ngModel)]="selectedUser.last_name" name="last_name">
+                            <label class="form-label">Lugar:</label>
+                            <input type="text" class="form-control" [(ngModel)]="selectedIncidencia.lugar" name="lugar">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col">
-                            <label class="form-label">Username</label>
-                            <input type="text" class="form-control" [(ngModel)]="selectedUser.username" name="username">
+                            <label for="estado" class="form-label">Estado*:</label>
+                                    <select [(ngModel)]="selectedIncidencia.estado" #estado="ngModel" class="form-select" id="estado" name="estado" required>
+                                        <option value="En proceso">En proceso</option>
+                                        <option value="Sin empezar">Sin empezar</option>
+                                        <option value="Reparado">Reparado</option>
+                                    </select>
                             </div>
                             <div class="col">
-                            <label class="form-label">Correo</label>
-                            <input type="email" class="form-control" [(ngModel)]="selectedUser.email" name="email">
+                              <label for="categoria" class="form-label">Categoría*:</label>
+                                    <select [(ngModel)]="selectedIncidencia.categoria" #categoria="ngModel" class="form-select" id="categoria" name="categoria">
+                                        <option selected>Seleccione una categoría</option>
+                                        <option value="Software">Software</option>
+                                        <option value="Hardware">Hardware</option>
+                                        <option value="Red">Red</option>
+                                        <option value="Cuenta de Usuario">Cuenta de Usuario</option>
+                                        <option value="Otros">Otros</option>
+                                    </select>
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" [(ngModel)]="selectedUser.phone" name="phone">
+                        <div class="col mb-3">
+                                    <label for="descripcion" class="form-label">Descripción*:</label>
+                                    <textarea [(ngModel)]="selectedIncidencia.detalles" #detalles="ngModel" class="form-control" name="detalles" id="detalles" rows="4" placeholder="Describa la incidencia"></textarea>
+                                    <div *ngIf="detalles.invalid && (detalles.dirty || detalles.touched)">
+                                        <p *ngIf="detalles.errors?.['required']" class="text-danger">Campo obligatorio.</p>
+                                    </div>
                         </div>
 
-                        <div class="form-check mb-2">
-                            <input 
-                            class="form-check-input" 
-                            type="checkbox" 
-                            [(ngModel)]="selectedUser.admin" 
-                            name="admin">
-                            <label class="form-check-label">
-                            Conceder rol de Administrador
-                            </label>
-                        </div>
 
                         </form>
                     </div>
@@ -238,7 +235,7 @@
                     <!-- FOOTER -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" (click)="editarUsuario()">Guardar cambios</button>
+                        <button type="button" class="btn btn-primary" (click)="editarIncidencia()" data-bs-dismiss="modal">Guardar cambios</button>
                     </div>
 
                     </div>
@@ -247,7 +244,7 @@
 
                   <!----------Delete modal----------------->
 
-                <div class="modal fade" id="eliminarUsuarioModal" tabindex="-1">
+                <div class="modal fade" id="eliminarIncidenciaModal" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
 
@@ -258,13 +255,13 @@
 
                     <!-- BODY -->
                     <div class="modal-body">
-                       <h3>¿Estás seguro de que quieres borrar este Usuario?</h3>
+                       <h3>¿Seguro que quieres borrar esta Incidencia?</h3>
                     </div>
 
                     <!-- FOOTER -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="eliminarUsuario()">Borrar</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="deleteIncidencia()">Borrar</button>
                     </div>
 
                     </div>
