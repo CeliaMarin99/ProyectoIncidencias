@@ -1,6 +1,7 @@
 services:
   frontend:
     build: ./frontend_incidencias
+    container_name: frontend_incidencias
     ports:
       - "4200:80"
     depends_on:
@@ -8,6 +9,7 @@ services:
 
   backend:
     build: ./backend_incidencias
+    container_name: backend_incidencias
     ports:
       - "8080:8080"
     environment:
@@ -17,8 +19,10 @@ services:
 
   mysql:
     image: mysql:8
+    container_name: mysql_incidencias
     environment:
       MYSQL_ROOT_PASSWORD: sasa
       MYSQL_DATABASE: db_incidencias
     ports:
-      - "3306:3306" # evita el problema de puerto ocupado
+      - "3306:3306"
+
