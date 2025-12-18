@@ -29,8 +29,6 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//AUTOINCLEMENTABLE
     private Long id;
 
-  
-
     @ExistsByUsername 
     @NotBlank
     @Column(unique = true)
