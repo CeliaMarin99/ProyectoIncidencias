@@ -4,22 +4,21 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const token = localStorage.getItem('token');
 
-  // Rutas verdaderamente públicas
+  // Rutas públicas
   const publicUrls = [
     '/users/login',
     '/users/crear',
-    '/registrar',    // si sigues usando esta
+    '/registrar'
   ];
 
-  // Comprueba si la request es pública
   const isPublic = publicUrls.some(url => req.url.includes(url));
 
-  // Si es pública → no enviamos token
+  // Si es pública → NO añadimos token
   if (isPublic) {
     return next(req);
   }
 
-  // Para el resto de rutas → añadir token si existe
+  // Si NO es pública y hay token → lo añadimos
   if (token) {
     const authReq = req.clone({
       setHeaders: {
@@ -29,6 +28,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(authReq);
   }
 
+  // 🔴 CLAVE: si no hay token, dejamos pasar la request
   return next(req);
 };
 
