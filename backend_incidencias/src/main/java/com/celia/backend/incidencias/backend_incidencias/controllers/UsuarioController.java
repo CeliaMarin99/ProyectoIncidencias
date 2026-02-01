@@ -42,8 +42,6 @@ public class UsuarioController {
     public ResponseEntity<?> register(@PathVariable String rol, @Valid  @RequestBody Usuario user, BindingResult result) {
         user.setAdmin(false);
       
-        //service.save(user); //guarda el usuario con rol USER por defecto
-
         //return ResponseEntity.ok(Map.of("mensaje", "Usuario registrado correctamente"));
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(user, rol));
     }

@@ -52,7 +52,7 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.PUT, "/incidencias/**")
             .hasAnyRole("USUARIO", "ADMIN", "TECNICO")
 
-        .requestMatchers(HttpMethod.POST, "/incidencias/**")
+        .requestMatchers(HttpMethod.POST, "/incidencias/**", "/registrar/**")
             .hasAnyRole("USUARIO", "ADMIN")
         .requestMatchers(HttpMethod.GET, "incidencias/**","/users","/users/**", "/mensajes/**").permitAll()
 
