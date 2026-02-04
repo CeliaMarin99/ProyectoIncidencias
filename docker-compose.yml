@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0.33
+    container_name: mysql-incidencias
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 69074cM*
+      MYSQL_DATABASE: db_incidencias
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+
+  backendincidencias:
+    build: backend_incidencias
+    container_name: api-incidencias
+    mem_limit: 512m
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/db_incidencias
+      DB_USER: root
+      DB_PASSWORD: 69074cM*
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: always
+
